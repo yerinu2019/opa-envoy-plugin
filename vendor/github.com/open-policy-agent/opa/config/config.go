@@ -11,10 +11,10 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/open-policy-agent/opa/ast"
-	"github.com/open-policy-agent/opa/internal/ref"
-	"github.com/open-policy-agent/opa/util"
-	"github.com/open-policy-agent/opa/version"
+	"github.com/yerinu2019/opa/ast"
+	"github.com/yerinu2019/opa/internal/ref"
+	"github.com/yerinu2019/opa/util"
+	"github.com/yerinu2019/opa/version"
 )
 
 // Config represents the configuration file that OPA can be started with.

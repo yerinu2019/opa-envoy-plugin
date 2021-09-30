@@ -20,8 +20,8 @@ import (
 	"github.com/OneOfOne/xxhash"
 	"github.com/pkg/errors"
 
-	"github.com/open-policy-agent/opa/ast/location"
-	"github.com/open-policy-agent/opa/util"
+	"github.com/yerinu2019/opa/ast/location"
+	"github.com/yerinu2019/opa/util"
 )
 
 var errFindNotFound = fmt.Errorf("find: not found")

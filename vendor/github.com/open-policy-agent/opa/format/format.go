@@ -11,7 +11,7 @@ import (
 	"regexp"
 	"sort"
 
-	"github.com/open-policy-agent/opa/ast"
+	"github.com/yerinu2019/opa/ast"
 )
 
 // Source formats a Rego source file. The bytes provided must describe a complete

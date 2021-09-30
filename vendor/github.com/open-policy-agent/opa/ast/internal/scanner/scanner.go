@@ -11,7 +11,7 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"github.com/open-policy-agent/opa/ast/internal/tokens"
+	"github.com/yerinu2019/opa/ast/internal/tokens"
 )
 
 const bom = 0xFEFF

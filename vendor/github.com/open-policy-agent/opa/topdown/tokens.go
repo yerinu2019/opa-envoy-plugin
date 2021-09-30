@@ -22,10 +22,10 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/open-policy-agent/opa/ast"
-	"github.com/open-policy-agent/opa/internal/jwx/jwk"
-	"github.com/open-policy-agent/opa/internal/jwx/jws"
-	"github.com/open-policy-agent/opa/topdown/builtins"
+	"github.com/yerinu2019/opa/ast"
+	"github.com/yerinu2019/opa/internal/jwx/jwk"
+	"github.com/yerinu2019/opa/internal/jwx/jws"
+	"github.com/yerinu2019/opa/topdown/builtins"
 )
 
 var (

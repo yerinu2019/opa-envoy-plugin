@@ -3,7 +3,7 @@ package rego
 import (
 	"fmt"
 
-	"github.com/open-policy-agent/opa/ast"
+	"github.com/yerinu2019/opa/ast"
 )
 
 // ResultSet represents a collection of output from Rego evaluation. An empty

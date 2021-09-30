@@ -8,8 +8,8 @@ import (
 	"encoding/json"
 	"io/ioutil"
 
-	"github.com/open-policy-agent/opa/internal/wasm/sdk/internal/wasm"
-	"github.com/open-policy-agent/opa/internal/wasm/sdk/opa/errors"
+	"github.com/yerinu2019/opa/internal/wasm/sdk/internal/wasm"
+	"github.com/yerinu2019/opa/internal/wasm/sdk/opa/errors"
 )
 
 // WithPolicyFile configures a policy file to load.

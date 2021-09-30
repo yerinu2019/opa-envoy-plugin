@@ -12,7 +12,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/open-policy-agent/opa/util"
+	"github.com/yerinu2019/opa/util"
 )
 
 // Sprint returns the string representation of the type.

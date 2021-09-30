@@ -7,8 +7,8 @@ package copypropagation
 import (
 	"fmt"
 
-	"github.com/open-policy-agent/opa/ast"
-	"github.com/open-policy-agent/opa/util"
+	"github.com/yerinu2019/opa/ast"
+	"github.com/yerinu2019/opa/util"
 )
 
 type rankFunc func(*unionFindRoot, *unionFindRoot) (*unionFindRoot, *unionFindRoot)

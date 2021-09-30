@@ -9,9 +9,9 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/open-policy-agent/opa/ast"
-	"github.com/open-policy-agent/opa/internal/rego/opa"
-	"github.com/open-policy-agent/opa/resolver"
+	"github.com/yerinu2019/opa/ast"
+	"github.com/yerinu2019/opa/internal/rego/opa"
+	"github.com/yerinu2019/opa/resolver"
 )
 
 // New creates a new Resolver instance which is using the Wasm module

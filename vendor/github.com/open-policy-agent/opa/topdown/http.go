@@ -22,11 +22,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/open-policy-agent/opa/ast"
-	"github.com/open-policy-agent/opa/internal/version"
-	"github.com/open-policy-agent/opa/topdown/builtins"
-	"github.com/open-policy-agent/opa/topdown/cache"
-	"github.com/open-policy-agent/opa/util"
+	"github.com/yerinu2019/opa/ast"
+	"github.com/yerinu2019/opa/internal/version"
+	"github.com/yerinu2019/opa/topdown/builtins"
+	"github.com/yerinu2019/opa/topdown/cache"
+	"github.com/yerinu2019/opa/util"
 )
 
 type cachingMode string

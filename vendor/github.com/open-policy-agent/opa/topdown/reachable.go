@@ -5,7 +5,7 @@
 package topdown
 
 import (
-	"github.com/open-policy-agent/opa/ast"
+	"github.com/yerinu2019/opa/ast"
 )
 
 // Helper: sets of vertices can be represented as Arrays or Sets.

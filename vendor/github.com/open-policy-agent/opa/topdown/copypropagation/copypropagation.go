@@ -7,7 +7,7 @@ package copypropagation
 import (
 	"sort"
 
-	"github.com/open-policy-agent/opa/ast"
+	"github.com/yerinu2019/opa/ast"
 )
 
 // CopyPropagator implements a simple copy propagation optimization to remove

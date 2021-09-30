@@ -7,8 +7,8 @@ package topdown
 import (
 	"math/big"
 
-	"github.com/open-policy-agent/opa/ast"
-	"github.com/open-policy-agent/opa/topdown/builtins"
+	"github.com/yerinu2019/opa/ast"
+	"github.com/yerinu2019/opa/topdown/builtins"
 )
 
 func builtinCount(a ast.Value) (ast.Value, error) {

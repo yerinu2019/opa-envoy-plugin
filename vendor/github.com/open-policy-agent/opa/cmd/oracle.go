@@ -15,11 +15,11 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/open-policy-agent/opa/ast"
-	"github.com/open-policy-agent/opa/bundle"
-	"github.com/open-policy-agent/opa/internal/oracle"
-	"github.com/open-policy-agent/opa/internal/presentation"
-	"github.com/open-policy-agent/opa/loader"
+	"github.com/yerinu2019/opa/ast"
+	"github.com/yerinu2019/opa/bundle"
+	"github.com/yerinu2019/opa/internal/oracle"
+	"github.com/yerinu2019/opa/internal/presentation"
+	"github.com/yerinu2019/opa/loader"
 )
 
 type findDefinitionParams struct {

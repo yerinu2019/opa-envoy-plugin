@@ -7,9 +7,9 @@ package topdown
 import (
 	"fmt"
 
-	"github.com/open-policy-agent/opa/ast"
-	"github.com/open-policy-agent/opa/internal/semver"
-	"github.com/open-policy-agent/opa/topdown/builtins"
+	"github.com/yerinu2019/opa/ast"
+	"github.com/yerinu2019/opa/internal/semver"
+	"github.com/yerinu2019/opa/topdown/builtins"
 )
 
 func builtinSemVerCompare(bctx BuiltinContext, args []*ast.Term, iter func(*ast.Term) error) error {

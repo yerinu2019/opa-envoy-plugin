@@ -11,8 +11,8 @@ import (
 
 	gintersect "github.com/yashtewari/glob-intersection"
 
-	"github.com/open-policy-agent/opa/ast"
-	"github.com/open-policy-agent/opa/topdown/builtins"
+	"github.com/yerinu2019/opa/ast"
+	"github.com/yerinu2019/opa/topdown/builtins"
 )
 
 var regexpCacheLock = sync.Mutex{}

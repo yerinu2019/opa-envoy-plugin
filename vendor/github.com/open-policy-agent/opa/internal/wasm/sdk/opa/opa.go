@@ -12,11 +12,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/open-policy-agent/opa/internal/wasm/sdk/internal/wasm"
-	"github.com/open-policy-agent/opa/internal/wasm/sdk/opa/errors"
-	sdk_errors "github.com/open-policy-agent/opa/internal/wasm/sdk/opa/errors"
-	"github.com/open-policy-agent/opa/metrics"
-	"github.com/open-policy-agent/opa/topdown/cache"
+	"github.com/yerinu2019/opa/internal/wasm/sdk/internal/wasm"
+	"github.com/yerinu2019/opa/internal/wasm/sdk/opa/errors"
+	sdk_errors "github.com/yerinu2019/opa/internal/wasm/sdk/opa/errors"
+	"github.com/yerinu2019/opa/metrics"
+	"github.com/yerinu2019/opa/topdown/cache"
 )
 
 var errNotReady = errors.New(errors.NotReadyErr, "")

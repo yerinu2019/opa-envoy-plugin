@@ -18,21 +18,21 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/open-policy-agent/opa/compile"
+	"github.com/yerinu2019/opa/compile"
 
-	"github.com/open-policy-agent/opa/version"
+	"github.com/yerinu2019/opa/version"
 
 	"github.com/peterh/liner"
 
-	"github.com/open-policy-agent/opa/ast"
-	"github.com/open-policy-agent/opa/format"
-	pr "github.com/open-policy-agent/opa/internal/presentation"
-	"github.com/open-policy-agent/opa/metrics"
-	"github.com/open-policy-agent/opa/profiler"
-	"github.com/open-policy-agent/opa/rego"
-	"github.com/open-policy-agent/opa/storage"
-	"github.com/open-policy-agent/opa/topdown"
-	"github.com/open-policy-agent/opa/topdown/lineage"
+	"github.com/yerinu2019/opa/ast"
+	"github.com/yerinu2019/opa/format"
+	pr "github.com/yerinu2019/opa/internal/presentation"
+	"github.com/yerinu2019/opa/metrics"
+	"github.com/yerinu2019/opa/profiler"
+	"github.com/yerinu2019/opa/rego"
+	"github.com/yerinu2019/opa/storage"
+	"github.com/yerinu2019/opa/topdown"
+	"github.com/yerinu2019/opa/topdown/lineage"
 )
 
 // REPL represents an instance of the interactive shell.

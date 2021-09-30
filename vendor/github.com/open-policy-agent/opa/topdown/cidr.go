@@ -8,9 +8,9 @@ import (
 	"net"
 	"sort"
 
-	"github.com/open-policy-agent/opa/ast"
-	cidrMerge "github.com/open-policy-agent/opa/internal/cidr/merge"
-	"github.com/open-policy-agent/opa/topdown/builtins"
+	"github.com/yerinu2019/opa/ast"
+	cidrMerge "github.com/yerinu2019/opa/internal/cidr/merge"
+	"github.com/yerinu2019/opa/topdown/builtins"
 )
 
 func getNetFromOperand(v ast.Value) (*net.IPNet, error) {

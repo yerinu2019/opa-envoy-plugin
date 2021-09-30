@@ -22,8 +22,8 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"github.com/open-policy-agent/opa/storage"
-	"github.com/open-policy-agent/opa/util"
+	"github.com/yerinu2019/opa/storage"
+	"github.com/yerinu2019/opa/util"
 )
 
 // New returns an empty in-memory store.

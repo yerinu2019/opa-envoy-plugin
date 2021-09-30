@@ -9,12 +9,12 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/open-policy-agent/opa/ast"
-	"github.com/open-policy-agent/opa/metrics"
-	"github.com/open-policy-agent/opa/storage"
-	"github.com/open-policy-agent/opa/topdown/builtins"
-	"github.com/open-policy-agent/opa/topdown/cache"
-	"github.com/open-policy-agent/opa/topdown/copypropagation"
+	"github.com/yerinu2019/opa/ast"
+	"github.com/yerinu2019/opa/metrics"
+	"github.com/yerinu2019/opa/storage"
+	"github.com/yerinu2019/opa/topdown/builtins"
+	"github.com/yerinu2019/opa/topdown/cache"
+	"github.com/yerinu2019/opa/topdown/copypropagation"
 )
 
 type evalIterator func(*eval) error
@@ -1571,7 +1571,7 @@ type evalFunc struct {
 func (e evalFunc) eval(iter unifyIterator) error {
 
 	// default functions aren't supported:
-	// https://github.com/open-policy-agent/opa/issues/2445
+	// https://github.com/yerinu2019/opa/issues/2445
 	if len(e.ir.Rules) == 0 {
 		return nil
 	}

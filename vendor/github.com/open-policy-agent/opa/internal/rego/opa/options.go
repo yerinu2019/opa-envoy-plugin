@@ -4,8 +4,8 @@ import (
 	"io"
 	"time"
 
-	"github.com/open-policy-agent/opa/metrics"
-	"github.com/open-policy-agent/opa/topdown/cache"
+	"github.com/yerinu2019/opa/metrics"
+	"github.com/yerinu2019/opa/topdown/cache"
 )
 
 // Result holds the evaluation result.

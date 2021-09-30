@@ -8,11 +8,11 @@ package cache
 import (
 	"container/list"
 
-	"github.com/open-policy-agent/opa/ast"
+	"github.com/yerinu2019/opa/ast"
 
 	"sync"
 
-	"github.com/open-policy-agent/opa/util"
+	"github.com/yerinu2019/opa/util"
 )
 
 const (

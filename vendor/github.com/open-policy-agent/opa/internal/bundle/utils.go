@@ -8,10 +8,10 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/open-policy-agent/opa/ast"
-	"github.com/open-policy-agent/opa/bundle"
-	"github.com/open-policy-agent/opa/resolver/wasm"
-	"github.com/open-policy-agent/opa/storage"
+	"github.com/yerinu2019/opa/ast"
+	"github.com/yerinu2019/opa/bundle"
+	"github.com/yerinu2019/opa/resolver/wasm"
+	"github.com/yerinu2019/opa/storage"
 )
 
 // LoadWasmResolversFromStore will lookup all Wasm modules from the store along with the

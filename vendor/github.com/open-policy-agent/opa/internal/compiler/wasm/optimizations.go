@@ -11,10 +11,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/open-policy-agent/opa/internal/compiler/wasm/opa"
-	"github.com/open-policy-agent/opa/internal/wasm/encoding"
-	"github.com/open-policy-agent/opa/internal/wasm/instruction"
-	"github.com/open-policy-agent/opa/internal/wasm/module"
+	"github.com/yerinu2019/opa/internal/compiler/wasm/opa"
+	"github.com/yerinu2019/opa/internal/wasm/encoding"
+	"github.com/yerinu2019/opa/internal/wasm/instruction"
+	"github.com/yerinu2019/opa/internal/wasm/module"
 )
 
 const warning = `---------------------------------------------------------------

@@ -12,10 +12,10 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/open-policy-agent/opa/internal/jwx/jwa"
-	"github.com/open-policy-agent/opa/internal/jwx/jws"
-	"github.com/open-policy-agent/opa/internal/jwx/jws/verify"
-	"github.com/open-policy-agent/opa/util"
+	"github.com/yerinu2019/opa/internal/jwx/jwa"
+	"github.com/yerinu2019/opa/internal/jwx/jws"
+	"github.com/yerinu2019/opa/internal/jwx/jws/verify"
+	"github.com/yerinu2019/opa/util"
 
 	"github.com/pkg/errors"
 )

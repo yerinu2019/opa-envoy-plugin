@@ -8,7 +8,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/open-policy-agent/opa/util"
+	"github.com/yerinu2019/opa/util"
 )
 
 const (

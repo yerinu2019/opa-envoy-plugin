@@ -7,8 +7,8 @@ import (
 	"testing"
 
 	ext_authz "github.com/envoyproxy/go-control-plane/envoy/service/auth/v3"
-	internal_util "github.com/open-policy-agent/opa-envoy-plugin/internal/util"
-	"github.com/open-policy-agent/opa/util"
+	internal_util "github.com/yerinu2019/opa-envoy-plugin/internal/util"
+	"github.com/yerinu2019/opa/util"
 	"github.com/sirupsen/logrus"
 	"google.golang.org/protobuf/reflect/protoregistry"
 )

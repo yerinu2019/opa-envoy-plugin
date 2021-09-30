@@ -15,10 +15,10 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/open-policy-agent/opa/internal/version"
-	"github.com/open-policy-agent/opa/keys"
-	"github.com/open-policy-agent/opa/logging"
-	"github.com/open-policy-agent/opa/util"
+	"github.com/yerinu2019/opa/internal/version"
+	"github.com/yerinu2019/opa/keys"
+	"github.com/yerinu2019/opa/logging"
+	"github.com/yerinu2019/opa/util"
 )
 
 const (

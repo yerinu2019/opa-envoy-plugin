@@ -7,14 +7,14 @@ import (
 	"sort"
 	"time"
 
-	"github.com/open-policy-agent/opa/resolver"
-	"github.com/open-policy-agent/opa/topdown/cache"
+	"github.com/yerinu2019/opa/resolver"
+	"github.com/yerinu2019/opa/topdown/cache"
 
-	"github.com/open-policy-agent/opa/ast"
-	"github.com/open-policy-agent/opa/metrics"
-	"github.com/open-policy-agent/opa/storage"
-	"github.com/open-policy-agent/opa/topdown/builtins"
-	"github.com/open-policy-agent/opa/topdown/copypropagation"
+	"github.com/yerinu2019/opa/ast"
+	"github.com/yerinu2019/opa/metrics"
+	"github.com/yerinu2019/opa/storage"
+	"github.com/yerinu2019/opa/topdown/builtins"
+	"github.com/yerinu2019/opa/topdown/copypropagation"
 )
 
 // QueryResultSet represents a collection of results returned by a query.

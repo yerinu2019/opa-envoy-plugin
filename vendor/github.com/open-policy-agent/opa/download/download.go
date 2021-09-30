@@ -17,15 +17,15 @@ import (
 	"sync"
 	"time"
 
-	"github.com/open-policy-agent/opa/plugins"
+	"github.com/yerinu2019/opa/plugins"
 
 	"github.com/pkg/errors"
 
-	"github.com/open-policy-agent/opa/bundle"
-	"github.com/open-policy-agent/opa/logging"
-	"github.com/open-policy-agent/opa/metrics"
-	"github.com/open-policy-agent/opa/plugins/rest"
-	"github.com/open-policy-agent/opa/util"
+	"github.com/yerinu2019/opa/bundle"
+	"github.com/yerinu2019/opa/logging"
+	"github.com/yerinu2019/opa/metrics"
+	"github.com/yerinu2019/opa/plugins/rest"
+	"github.com/yerinu2019/opa/util"
 )
 
 const (

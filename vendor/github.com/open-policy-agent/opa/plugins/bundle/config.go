@@ -10,12 +10,12 @@ import (
 	"path"
 	"strings"
 
-	"github.com/open-policy-agent/opa/plugins"
+	"github.com/yerinu2019/opa/plugins"
 
-	"github.com/open-policy-agent/opa/bundle"
-	"github.com/open-policy-agent/opa/download"
-	"github.com/open-policy-agent/opa/keys"
-	"github.com/open-policy-agent/opa/util"
+	"github.com/yerinu2019/opa/bundle"
+	"github.com/yerinu2019/opa/download"
+	"github.com/yerinu2019/opa/keys"
+	"github.com/yerinu2019/opa/util"
 )
 
 // ParseConfig validates the config and injects default values. This is

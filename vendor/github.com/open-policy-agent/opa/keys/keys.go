@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/open-policy-agent/opa/util"
+	"github.com/yerinu2019/opa/util"
 )
 
 const defaultSigningAlgorithm = "RS256"

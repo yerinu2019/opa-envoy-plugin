@@ -16,11 +16,11 @@ import (
 	"github.com/olekukonko/tablewriter"
 	"github.com/spf13/cobra"
 
-	"github.com/open-policy-agent/opa/compile"
-	"github.com/open-policy-agent/opa/internal/presentation"
-	"github.com/open-policy-agent/opa/metrics"
-	"github.com/open-policy-agent/opa/rego"
-	"github.com/open-policy-agent/opa/util"
+	"github.com/yerinu2019/opa/compile"
+	"github.com/yerinu2019/opa/internal/presentation"
+	"github.com/yerinu2019/opa/metrics"
+	"github.com/yerinu2019/opa/rego"
+	"github.com/yerinu2019/opa/util"
 )
 
 // benchmarkCommandParams are a superset of evalCommandParams

@@ -13,12 +13,12 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/open-policy-agent/opa/internal/leb128"
-	"github.com/open-policy-agent/opa/internal/wasm/constant"
-	"github.com/open-policy-agent/opa/internal/wasm/instruction"
-	"github.com/open-policy-agent/opa/internal/wasm/module"
-	"github.com/open-policy-agent/opa/internal/wasm/opcode"
-	"github.com/open-policy-agent/opa/internal/wasm/types"
+	"github.com/yerinu2019/opa/internal/leb128"
+	"github.com/yerinu2019/opa/internal/wasm/constant"
+	"github.com/yerinu2019/opa/internal/wasm/instruction"
+	"github.com/yerinu2019/opa/internal/wasm/module"
+	"github.com/yerinu2019/opa/internal/wasm/opcode"
+	"github.com/yerinu2019/opa/internal/wasm/types"
 )
 
 // ReadModule reads a binary-encoded WASM module from r.

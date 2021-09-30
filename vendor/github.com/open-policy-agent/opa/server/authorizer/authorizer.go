@@ -12,13 +12,13 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/open-policy-agent/opa/ast"
-	"github.com/open-policy-agent/opa/rego"
-	"github.com/open-policy-agent/opa/server/identifier"
-	"github.com/open-policy-agent/opa/server/types"
-	"github.com/open-policy-agent/opa/server/writer"
-	"github.com/open-policy-agent/opa/storage"
-	"github.com/open-policy-agent/opa/util"
+	"github.com/yerinu2019/opa/ast"
+	"github.com/yerinu2019/opa/rego"
+	"github.com/yerinu2019/opa/server/identifier"
+	"github.com/yerinu2019/opa/server/types"
+	"github.com/yerinu2019/opa/server/writer"
+	"github.com/yerinu2019/opa/storage"
+	"github.com/yerinu2019/opa/util"
 )
 
 // Basic provides policy-based authorization over incoming requests.

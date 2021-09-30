@@ -11,10 +11,10 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/open-policy-agent/opa/ast"
-	"github.com/open-policy-agent/opa/metrics"
-	"github.com/open-policy-agent/opa/storage"
-	"github.com/open-policy-agent/opa/util"
+	"github.com/yerinu2019/opa/ast"
+	"github.com/yerinu2019/opa/metrics"
+	"github.com/yerinu2019/opa/storage"
+	"github.com/yerinu2019/opa/util"
 )
 
 // BundlesBasePath is the storage path used for storing bundle metadata
