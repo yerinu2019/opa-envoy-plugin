@@ -1,4 +1,4 @@
-module github.com/yerinu2019/opa-envoy-plugin/v0
+module github.com/yerinu2019/opa-envoy-plugin
 
 go 1.15
 

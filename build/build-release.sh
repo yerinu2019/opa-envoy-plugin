@@ -3,7 +3,7 @@
 
 set -e
 
-OPA_ENVOY_DIR=/go/src/github.com/open-policy-agent/opa-envoy-plugin
+OPA_ENVOY_DIR=/go/src/github.com/yerinu2019/opa-envoy-plugin
 BUILD_DIR=$OPA_ENVOY_DIR/build
 
 usage() {
@@ -46,8 +46,8 @@ build_release() {
 }
 
 clone_repo() {
-    git clone $SOURCE_URL /go/src/github.com/open-policy-agent/opa-envoy-plugin
-    cd /go/src/github.com/open-policy-agent/opa-envoy-plugin
+    git clone $SOURCE_URL /go/src/github.com/yerinu2019/opa-envoy-plugin
+    cd /go/src/github.com/yerinu2019/opa-envoy-plugin
     if [ -n "$VERSION" ]; then
         git checkout v${VERSION}
     fi
