@@ -2,6 +2,7 @@
 .DS_Store
 .vscode
 .idea
+.go/cache
 
 # build artifacts
 coverage
