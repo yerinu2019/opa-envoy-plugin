@@ -44,10 +44,10 @@ BUILD_COMMIT := $(shell ./build/get-build-commit.sh)
 BUILD_TIMESTAMP := $(shell ./build/get-build-timestamp.sh)
 BUILD_HOSTNAME := $(shell ./build/get-build-hostname.sh)
 
-LDFLAGS := "-X github.com/yerinu2019/opa/version.Version=$(VERSION) \
-	-X github.com/yerinu2019/opa/version.Vcs=$(BUILD_COMMIT) \
-	-X github.com/yerinu2019/opa/version.Timestamp=$(BUILD_TIMESTAMP) \
-	-X github.com/yerinu2019/opa/version.Hostname=$(BUILD_HOSTNAME)"
+LDFLAGS := "-X github.com/open-policy-agent/opa/version.Version=$(VERSION) \
+	-X github.com/open-policy-agent/opa/version.Vcs=$(BUILD_COMMIT) \
+	-X github.com/open-policy-agent/opa/version.Timestamp=$(BUILD_TIMESTAMP) \
+	-X github.com/open-policy-agent/opa/version.Hostname=$(BUILD_HOSTNAME)"
 
 .PHONY: all build build-darwin build-linux build-windows clean check check-fmt check-vet check-lint \
     deploy-ci docker-login generate image image-quick push push-latest tag-latest \

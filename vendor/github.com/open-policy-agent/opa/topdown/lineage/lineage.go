@@ -5,7 +5,7 @@
 package lineage
 
 import (
-	"github.com/yerinu2019/opa/topdown"
+	"github.com/open-policy-agent/opa/topdown"
 )
 
 // Notes returns a filtered trace that contains Note events and context to

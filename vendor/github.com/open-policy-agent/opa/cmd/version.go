@@ -13,9 +13,9 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/yerinu2019/opa/internal/report"
-	"github.com/yerinu2019/opa/internal/uuid"
-	"github.com/yerinu2019/opa/version"
+	"github.com/open-policy-agent/opa/internal/report"
+	"github.com/open-policy-agent/opa/internal/uuid"
+	"github.com/open-policy-agent/opa/version"
 )
 
 func init() {

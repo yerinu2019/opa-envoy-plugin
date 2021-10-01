@@ -4,7 +4,7 @@
 
 package topdown
 
-import "github.com/yerinu2019/opa/ast"
+import "github.com/open-policy-agent/opa/ast"
 
 func builtinOPARuntime(bctx BuiltinContext, _ []*ast.Term, iter func(*ast.Term) error) error {
 

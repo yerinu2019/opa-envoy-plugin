@@ -7,8 +7,8 @@ package topdown
 import (
 	"math/big"
 
-	"github.com/yerinu2019/opa/ast"
-	"github.com/yerinu2019/opa/topdown/builtins"
+	"github.com/open-policy-agent/opa/ast"
+	"github.com/open-policy-agent/opa/topdown/builtins"
 )
 
 type bitsArity1 func(a *big.Int) (*big.Int, error)

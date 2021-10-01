@@ -15,11 +15,11 @@ import (
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
 
-	"github.com/yerinu2019/opa/logging"
-	"github.com/yerinu2019/opa/metrics"
-	"github.com/yerinu2019/opa/plugins"
-	"github.com/yerinu2019/opa/plugins/bundle"
-	"github.com/yerinu2019/opa/util"
+	"github.com/open-policy-agent/opa/logging"
+	"github.com/open-policy-agent/opa/metrics"
+	"github.com/open-policy-agent/opa/plugins"
+	"github.com/open-policy-agent/opa/plugins/bundle"
+	"github.com/open-policy-agent/opa/util"
 )
 
 // Logger defines the interface for status plugins.

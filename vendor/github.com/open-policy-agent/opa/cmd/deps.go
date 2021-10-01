@@ -8,15 +8,15 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/yerinu2019/opa/dependencies"
-	"github.com/yerinu2019/opa/internal/presentation"
+	"github.com/open-policy-agent/opa/dependencies"
+	"github.com/open-policy-agent/opa/internal/presentation"
 
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
-	"github.com/yerinu2019/opa/ast"
-	"github.com/yerinu2019/opa/loader"
-	"github.com/yerinu2019/opa/util"
+	"github.com/open-policy-agent/opa/ast"
+	"github.com/open-policy-agent/opa/loader"
+	"github.com/open-policy-agent/opa/util"
 )
 
 type depsCommandParams struct {

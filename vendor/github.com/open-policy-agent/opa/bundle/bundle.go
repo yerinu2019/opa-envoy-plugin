@@ -20,12 +20,12 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/yerinu2019/opa/ast"
-	"github.com/yerinu2019/opa/format"
-	"github.com/yerinu2019/opa/internal/file/archive"
-	"github.com/yerinu2019/opa/internal/merge"
-	"github.com/yerinu2019/opa/metrics"
-	"github.com/yerinu2019/opa/util"
+	"github.com/open-policy-agent/opa/ast"
+	"github.com/open-policy-agent/opa/format"
+	"github.com/open-policy-agent/opa/internal/file/archive"
+	"github.com/open-policy-agent/opa/internal/merge"
+	"github.com/open-policy-agent/opa/metrics"
+	"github.com/open-policy-agent/opa/util"
 )
 
 // Common file extensions and file names.

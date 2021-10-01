@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/yerinu2019/opa/ast"
+	"github.com/open-policy-agent/opa/ast"
 )
 
 // saveSet contains a stack of terms that are considered 'unknown' during

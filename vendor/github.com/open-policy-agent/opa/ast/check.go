@@ -9,8 +9,8 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/yerinu2019/opa/types"
-	"github.com/yerinu2019/opa/util"
+	"github.com/open-policy-agent/opa/types"
+	"github.com/open-policy-agent/opa/util"
 )
 
 type rewriteVars func(x Ref) Ref

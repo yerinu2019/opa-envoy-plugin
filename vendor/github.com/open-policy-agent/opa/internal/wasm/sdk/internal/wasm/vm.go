@@ -16,11 +16,11 @@ import (
 
 	"github.com/bytecodealliance/wasmtime-go"
 
-	"github.com/yerinu2019/opa/ast"
-	sdk_errors "github.com/yerinu2019/opa/internal/wasm/sdk/opa/errors"
-	"github.com/yerinu2019/opa/metrics"
-	"github.com/yerinu2019/opa/topdown"
-	"github.com/yerinu2019/opa/topdown/cache"
+	"github.com/open-policy-agent/opa/ast"
+	sdk_errors "github.com/open-policy-agent/opa/internal/wasm/sdk/opa/errors"
+	"github.com/open-policy-agent/opa/metrics"
+	"github.com/open-policy-agent/opa/topdown"
+	"github.com/open-policy-agent/opa/topdown/cache"
 )
 
 // VM is a wrapper around a Wasm VM instance

@@ -12,14 +12,14 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/yerinu2019/opa/keys"
+	"github.com/open-policy-agent/opa/keys"
 
 	"os"
 	"time"
 
-	"github.com/yerinu2019/opa/plugins/rest"
-	"github.com/yerinu2019/opa/util"
-	"github.com/yerinu2019/opa/version"
+	"github.com/open-policy-agent/opa/plugins/rest"
+	"github.com/open-policy-agent/opa/util"
+	"github.com/open-policy-agent/opa/version"
 )
 
 // ExternalServiceURL is the base HTTP URL for a telemetry service.
@@ -27,7 +27,7 @@ import (
 //
 // Override at build time via:
 //
-//    -ldflags "-X github.com/yerinu2019/opa/internal/report.ExternalServiceURL=<url>"
+//    -ldflags "-X github.com/open-policy-agent/opa/internal/report.ExternalServiceURL=<url>"
 //
 // This will be overridden if the OPA_TELEMETRY_SERVICE_URL environment variable
 // is provided.

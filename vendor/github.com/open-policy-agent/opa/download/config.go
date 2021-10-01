@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/yerinu2019/opa/plugins"
+	"github.com/open-policy-agent/opa/plugins"
 )
 
 const (

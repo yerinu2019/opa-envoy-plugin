@@ -12,12 +12,12 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/yerinu2019/opa/ast"
-	"github.com/yerinu2019/opa/bundle"
-	storedversion "github.com/yerinu2019/opa/internal/version"
-	"github.com/yerinu2019/opa/loader"
-	"github.com/yerinu2019/opa/metrics"
-	"github.com/yerinu2019/opa/storage"
+	"github.com/open-policy-agent/opa/ast"
+	"github.com/open-policy-agent/opa/bundle"
+	storedversion "github.com/open-policy-agent/opa/internal/version"
+	"github.com/open-policy-agent/opa/loader"
+	"github.com/open-policy-agent/opa/metrics"
+	"github.com/open-policy-agent/opa/storage"
 )
 
 // InsertAndCompileOptions contains the input for the operation.

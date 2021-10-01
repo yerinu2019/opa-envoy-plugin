@@ -18,9 +18,9 @@ import (
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
-	"github.com/yerinu2019/opa/bundle"
-	initload "github.com/yerinu2019/opa/internal/runtime/init"
-	"github.com/yerinu2019/opa/util"
+	"github.com/open-policy-agent/opa/bundle"
+	initload "github.com/open-policy-agent/opa/internal/runtime/init"
+	"github.com/open-policy-agent/opa/util"
 )
 
 type signCmdParams struct {

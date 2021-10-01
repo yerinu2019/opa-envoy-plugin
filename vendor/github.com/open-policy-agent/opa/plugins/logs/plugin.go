@@ -21,16 +21,16 @@ import (
 	"github.com/pkg/errors"
 	"golang.org/x/time/rate"
 
-	"github.com/yerinu2019/opa/ast"
-	"github.com/yerinu2019/opa/internal/ref"
-	"github.com/yerinu2019/opa/logging"
-	"github.com/yerinu2019/opa/metrics"
-	"github.com/yerinu2019/opa/plugins"
-	"github.com/yerinu2019/opa/plugins/rest"
-	"github.com/yerinu2019/opa/rego"
-	"github.com/yerinu2019/opa/server"
-	"github.com/yerinu2019/opa/storage"
-	"github.com/yerinu2019/opa/util"
+	"github.com/open-policy-agent/opa/ast"
+	"github.com/open-policy-agent/opa/internal/ref"
+	"github.com/open-policy-agent/opa/logging"
+	"github.com/open-policy-agent/opa/metrics"
+	"github.com/open-policy-agent/opa/plugins"
+	"github.com/open-policy-agent/opa/plugins/rest"
+	"github.com/open-policy-agent/opa/rego"
+	"github.com/open-policy-agent/opa/server"
+	"github.com/open-policy-agent/opa/storage"
+	"github.com/open-policy-agent/opa/util"
 )
 
 // Logger defines the interface for decision logging plugins.

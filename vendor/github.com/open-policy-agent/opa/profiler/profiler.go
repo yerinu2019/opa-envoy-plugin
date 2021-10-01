@@ -9,9 +9,9 @@ import (
 	"sort"
 	"time"
 
-	"github.com/yerinu2019/opa/ast"
-	"github.com/yerinu2019/opa/metrics"
-	"github.com/yerinu2019/opa/topdown"
+	"github.com/open-policy-agent/opa/ast"
+	"github.com/open-policy-agent/opa/metrics"
+	"github.com/open-policy-agent/opa/topdown"
 )
 
 // Profiler computes and reports on the time spent on expressions.

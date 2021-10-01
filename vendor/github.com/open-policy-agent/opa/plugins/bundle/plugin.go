@@ -17,14 +17,14 @@ import (
 	"sync"
 	"time"
 
-	"github.com/yerinu2019/opa/ast"
-	"github.com/yerinu2019/opa/bundle"
-	"github.com/yerinu2019/opa/download"
-	bundleUtils "github.com/yerinu2019/opa/internal/bundle"
-	"github.com/yerinu2019/opa/logging"
-	"github.com/yerinu2019/opa/metrics"
-	"github.com/yerinu2019/opa/plugins"
-	"github.com/yerinu2019/opa/storage"
+	"github.com/open-policy-agent/opa/ast"
+	"github.com/open-policy-agent/opa/bundle"
+	"github.com/open-policy-agent/opa/download"
+	bundleUtils "github.com/open-policy-agent/opa/internal/bundle"
+	"github.com/open-policy-agent/opa/logging"
+	"github.com/open-policy-agent/opa/metrics"
+	"github.com/open-policy-agent/opa/plugins"
+	"github.com/open-policy-agent/opa/storage"
 )
 
 // Loader defines the interface that the bundle plugin uses to control bundle

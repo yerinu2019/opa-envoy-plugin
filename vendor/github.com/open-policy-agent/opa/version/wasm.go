@@ -4,7 +4,7 @@
 
 package version
 
-import "github.com/yerinu2019/opa/internal/rego/opa"
+import "github.com/open-policy-agent/opa/internal/rego/opa"
 
 // WasmRuntimeAvailable indicates if a wasm runtime is available in this OPA.
 func WasmRuntimeAvailable() bool {

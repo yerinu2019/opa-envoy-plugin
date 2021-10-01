@@ -22,7 +22,7 @@ import (
 
 	"github.com/sirupsen/logrus"
 
-	"github.com/yerinu2019/opa/server/types"
+	"github.com/open-policy-agent/opa/server/types"
 )
 
 func loggingEnabled(level logrus.Level) bool {
@@ -82,11 +82,11 @@ func (h *LoggingHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	params := r.URL.Query()
 
 	if _, ok := params["watch"]; ok {
-		logrus.Warn("Deprecated 'watch' parameter specified in request. See https://github.com/yerinu2019/opa/releases/tag/v0.23.0 for details.")
+		logrus.Warn("Deprecated 'watch' parameter specified in request. See https://github.com/open-policy-agent/opa/releases/tag/v0.23.0 for details.")
 	}
 
 	if _, ok := params["partial"]; ok {
-		logrus.Warn("Deprecated 'partial' parameter specified in request. See https://github.com/yerinu2019/opa/releases/tag/v0.23.0 for details.")
+		logrus.Warn("Deprecated 'partial' parameter specified in request. See https://github.com/open-policy-agent/opa/releases/tag/v0.23.0 for details.")
 	}
 
 	h.inner.ServeHTTP(recorder, r)

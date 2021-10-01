@@ -15,8 +15,8 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/yerinu2019/opa/format"
-	fileurl "github.com/yerinu2019/opa/internal/file/url"
+	"github.com/open-policy-agent/opa/format"
+	fileurl "github.com/open-policy-agent/opa/internal/file/url"
 )
 
 type fmtCommandParams struct {

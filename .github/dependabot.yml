@@ -3,6 +3,6 @@ updates:
   - package-ecosystem: gomod
     directory: /
     allow:
-      - dependency-name: github.com/yerinu2019/opa
+      - dependency-name: github.com/open-policy-agent/opa
     schedule:
       interval: daily

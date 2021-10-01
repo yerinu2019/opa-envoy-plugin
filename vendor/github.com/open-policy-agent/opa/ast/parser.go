@@ -17,9 +17,9 @@ import (
 	"github.com/pkg/errors"
 	"gopkg.in/yaml.v2"
 
-	"github.com/yerinu2019/opa/ast/internal/scanner"
-	"github.com/yerinu2019/opa/ast/internal/tokens"
-	"github.com/yerinu2019/opa/ast/location"
+	"github.com/open-policy-agent/opa/ast/internal/scanner"
+	"github.com/open-policy-agent/opa/ast/internal/tokens"
+	"github.com/open-policy-agent/opa/ast/location"
 )
 
 // Note: This state is kept isolated from the parser so that we

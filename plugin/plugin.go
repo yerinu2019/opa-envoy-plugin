@@ -5,7 +5,7 @@
 package plugin
 
 import (
-	"github.com/yerinu2019/opa/plugins"
+	"github.com/open-policy-agent/opa/plugins"
 
 	"github.com/yerinu2019/opa-envoy-plugin/internal"
 )

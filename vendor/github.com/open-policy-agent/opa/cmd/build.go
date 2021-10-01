@@ -14,11 +14,11 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/yerinu2019/opa/ast"
-	"github.com/yerinu2019/opa/bundle"
-	"github.com/yerinu2019/opa/compile"
-	"github.com/yerinu2019/opa/keys"
-	"github.com/yerinu2019/opa/util"
+	"github.com/open-policy-agent/opa/ast"
+	"github.com/open-policy-agent/opa/bundle"
+	"github.com/open-policy-agent/opa/compile"
+	"github.com/open-policy-agent/opa/keys"
+	"github.com/open-policy-agent/opa/util"
 )
 
 const defaultPublicKeyID = "default"

@@ -11,12 +11,12 @@ import (
 	"io"
 	"math"
 
-	"github.com/yerinu2019/opa/internal/leb128"
-	"github.com/yerinu2019/opa/internal/wasm/constant"
-	"github.com/yerinu2019/opa/internal/wasm/instruction"
-	"github.com/yerinu2019/opa/internal/wasm/module"
-	"github.com/yerinu2019/opa/internal/wasm/opcode"
-	"github.com/yerinu2019/opa/internal/wasm/types"
+	"github.com/open-policy-agent/opa/internal/leb128"
+	"github.com/open-policy-agent/opa/internal/wasm/constant"
+	"github.com/open-policy-agent/opa/internal/wasm/instruction"
+	"github.com/open-policy-agent/opa/internal/wasm/module"
+	"github.com/open-policy-agent/opa/internal/wasm/opcode"
+	"github.com/open-policy-agent/opa/internal/wasm/types"
 )
 
 // WriteModule writes a binary-encoded representation of module to w.

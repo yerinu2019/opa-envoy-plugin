@@ -12,17 +12,17 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/yerinu2019/opa/ast"
-	"github.com/yerinu2019/opa/bundle"
-	"github.com/yerinu2019/opa/compile"
-	"github.com/yerinu2019/opa/cover"
-	"github.com/yerinu2019/opa/internal/runtime"
-	"github.com/yerinu2019/opa/storage"
-	"github.com/yerinu2019/opa/storage/inmem"
-	"github.com/yerinu2019/opa/tester"
-	"github.com/yerinu2019/opa/topdown"
-	"github.com/yerinu2019/opa/topdown/lineage"
-	"github.com/yerinu2019/opa/util"
+	"github.com/open-policy-agent/opa/ast"
+	"github.com/open-policy-agent/opa/bundle"
+	"github.com/open-policy-agent/opa/compile"
+	"github.com/open-policy-agent/opa/cover"
+	"github.com/open-policy-agent/opa/internal/runtime"
+	"github.com/open-policy-agent/opa/storage"
+	"github.com/open-policy-agent/opa/storage/inmem"
+	"github.com/open-policy-agent/opa/tester"
+	"github.com/open-policy-agent/opa/topdown"
+	"github.com/open-policy-agent/opa/topdown/lineage"
+	"github.com/open-policy-agent/opa/util"
 )
 
 const (

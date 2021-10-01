@@ -15,9 +15,9 @@ import (
 
 	ghodss "github.com/ghodss/yaml"
 
-	"github.com/yerinu2019/opa/ast"
-	"github.com/yerinu2019/opa/topdown/builtins"
-	"github.com/yerinu2019/opa/util"
+	"github.com/open-policy-agent/opa/ast"
+	"github.com/open-policy-agent/opa/topdown/builtins"
+	"github.com/open-policy-agent/opa/util"
 )
 
 func builtinJSONMarshal(a ast.Value) (ast.Value, error) {

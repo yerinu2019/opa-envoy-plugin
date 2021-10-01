@@ -15,11 +15,11 @@ import (
 
 	"github.com/ghodss/yaml"
 
-	"github.com/yerinu2019/opa/internal/strvals"
-	"github.com/yerinu2019/opa/keys"
-	"github.com/yerinu2019/opa/logging"
-	"github.com/yerinu2019/opa/plugins/rest"
-	"github.com/yerinu2019/opa/util"
+	"github.com/open-policy-agent/opa/internal/strvals"
+	"github.com/open-policy-agent/opa/keys"
+	"github.com/open-policy-agent/opa/logging"
+	"github.com/open-policy-agent/opa/plugins/rest"
+	"github.com/open-policy-agent/opa/util"
 )
 
 // ServiceOptions stores the options passed to ParseServicesConfig

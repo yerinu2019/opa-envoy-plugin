@@ -16,14 +16,14 @@ import (
 
 	"github.com/ghodss/yaml"
 
-	"github.com/yerinu2019/opa/ast"
-	"github.com/yerinu2019/opa/bundle"
-	fileurl "github.com/yerinu2019/opa/internal/file/url"
-	"github.com/yerinu2019/opa/internal/merge"
-	"github.com/yerinu2019/opa/metrics"
-	"github.com/yerinu2019/opa/storage"
-	"github.com/yerinu2019/opa/storage/inmem"
-	"github.com/yerinu2019/opa/util"
+	"github.com/open-policy-agent/opa/ast"
+	"github.com/open-policy-agent/opa/bundle"
+	fileurl "github.com/open-policy-agent/opa/internal/file/url"
+	"github.com/open-policy-agent/opa/internal/merge"
+	"github.com/open-policy-agent/opa/metrics"
+	"github.com/open-policy-agent/opa/storage"
+	"github.com/open-policy-agent/opa/storage/inmem"
+	"github.com/open-policy-agent/opa/util"
 )
 
 // Result represents the result of successfully loading zero or more files.

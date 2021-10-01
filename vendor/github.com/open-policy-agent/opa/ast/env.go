@@ -5,8 +5,8 @@
 package ast
 
 import (
-	"github.com/yerinu2019/opa/types"
-	"github.com/yerinu2019/opa/util"
+	"github.com/open-policy-agent/opa/types"
+	"github.com/open-policy-agent/opa/util"
 )
 
 // TypeEnv contains type info for static analysis such as type checking.

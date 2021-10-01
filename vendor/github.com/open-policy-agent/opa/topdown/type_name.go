@@ -7,7 +7,7 @@ package topdown
 import (
 	"fmt"
 
-	"github.com/yerinu2019/opa/ast"
+	"github.com/open-policy-agent/opa/ast"
 )
 
 func builtinTypeName(a ast.Value) (ast.Value, error) {

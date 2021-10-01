@@ -18,11 +18,11 @@ import (
 
 	"github.com/bytecodealliance/wasmtime-go"
 
-	"github.com/yerinu2019/opa/ast"
-	"github.com/yerinu2019/opa/metrics"
-	"github.com/yerinu2019/opa/topdown"
-	"github.com/yerinu2019/opa/topdown/builtins"
-	"github.com/yerinu2019/opa/topdown/cache"
+	"github.com/open-policy-agent/opa/ast"
+	"github.com/open-policy-agent/opa/metrics"
+	"github.com/open-policy-agent/opa/topdown"
+	"github.com/open-policy-agent/opa/topdown/builtins"
+	"github.com/open-policy-agent/opa/topdown/cache"
 )
 
 func opaFunctions(dispatcher *builtinDispatcher, store *wasmtime.Store) map[string]wasmtime.AsExtern {

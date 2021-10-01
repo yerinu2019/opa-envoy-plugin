@@ -6,4 +6,4 @@
 
 package server
 
-import _ "github.com/yerinu2019/opa/features/wasm"
+import _ "github.com/open-policy-agent/opa/features/wasm"

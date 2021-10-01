@@ -10,11 +10,11 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/yerinu2019/opa/internal/jwx/jwa"
-	"github.com/yerinu2019/opa/internal/jwx/jws/sign"
-	"github.com/yerinu2019/opa/keys"
+	"github.com/open-policy-agent/opa/internal/jwx/jwa"
+	"github.com/open-policy-agent/opa/internal/jwx/jws/sign"
+	"github.com/open-policy-agent/opa/keys"
 
-	"github.com/yerinu2019/opa/util"
+	"github.com/open-policy-agent/opa/util"
 )
 
 const (

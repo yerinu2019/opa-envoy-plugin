@@ -4,7 +4,7 @@
 
 package topdown
 
-import "github.com/yerinu2019/opa/metrics"
+import "github.com/open-policy-agent/opa/metrics"
 
 const (
 	evalOpPlug                    = "eval_op_plug"

@@ -9,8 +9,8 @@ import (
 	ext_core_v3 "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	ext_type_v3 "github.com/envoyproxy/go-control-plane/envoy/type/v3"
 	"github.com/yerinu2019/opa-envoy-plugin/internal/util"
-	"github.com/yerinu2019/opa/metrics"
-	"github.com/yerinu2019/opa/storage"
+	"github.com/open-policy-agent/opa/metrics"
+	"github.com/open-policy-agent/opa/storage"
 )
 
 // EvalResult - Captures the result from evaluating a query against an input

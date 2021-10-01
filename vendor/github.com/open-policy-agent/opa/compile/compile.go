@@ -16,19 +16,19 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/yerinu2019/opa/ast"
-	"github.com/yerinu2019/opa/bundle"
-	"github.com/yerinu2019/opa/internal/compiler/wasm"
-	"github.com/yerinu2019/opa/internal/debug"
-	"github.com/yerinu2019/opa/internal/ir"
-	"github.com/yerinu2019/opa/internal/planner"
-	"github.com/yerinu2019/opa/internal/ref"
-	initload "github.com/yerinu2019/opa/internal/runtime/init"
-	"github.com/yerinu2019/opa/internal/wasm/encoding"
-	"github.com/yerinu2019/opa/loader"
-	"github.com/yerinu2019/opa/rego"
-	"github.com/yerinu2019/opa/storage"
-	"github.com/yerinu2019/opa/storage/inmem"
+	"github.com/open-policy-agent/opa/ast"
+	"github.com/open-policy-agent/opa/bundle"
+	"github.com/open-policy-agent/opa/internal/compiler/wasm"
+	"github.com/open-policy-agent/opa/internal/debug"
+	"github.com/open-policy-agent/opa/internal/ir"
+	"github.com/open-policy-agent/opa/internal/planner"
+	"github.com/open-policy-agent/opa/internal/ref"
+	initload "github.com/open-policy-agent/opa/internal/runtime/init"
+	"github.com/open-policy-agent/opa/internal/wasm/encoding"
+	"github.com/open-policy-agent/opa/loader"
+	"github.com/open-policy-agent/opa/rego"
+	"github.com/open-policy-agent/opa/storage"
+	"github.com/open-policy-agent/opa/storage/inmem"
 )
 
 const (

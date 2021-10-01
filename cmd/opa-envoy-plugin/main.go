@@ -9,8 +9,8 @@ import (
 	"os"
 
 	"github.com/yerinu2019/opa-envoy-plugin/plugin"
-	"github.com/yerinu2019/opa/cmd"
-	"github.com/yerinu2019/opa/runtime"
+	"github.com/open-policy-agent/opa/cmd"
+	"github.com/open-policy-agent/opa/runtime"
 )
 
 func main() {

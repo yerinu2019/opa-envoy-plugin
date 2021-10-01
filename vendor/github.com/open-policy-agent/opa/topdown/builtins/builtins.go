@@ -10,7 +10,7 @@ import (
 	"math/big"
 	"strings"
 
-	"github.com/yerinu2019/opa/ast"
+	"github.com/open-policy-agent/opa/ast"
 )
 
 // Cache defines the built-in cache used by the top-down evaluation. The keys

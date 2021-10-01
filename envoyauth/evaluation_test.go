@@ -7,15 +7,15 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/yerinu2019/opa/plugins/logs"
+	"github.com/open-policy-agent/opa/plugins/logs"
 
-	"github.com/yerinu2019/opa/ast"
-	"github.com/yerinu2019/opa/bundle"
-	"github.com/yerinu2019/opa/plugins"
-	"github.com/yerinu2019/opa/rego"
-	"github.com/yerinu2019/opa/storage"
-	"github.com/yerinu2019/opa/storage/inmem"
-	iCache "github.com/yerinu2019/opa/topdown/cache"
+	"github.com/open-policy-agent/opa/ast"
+	"github.com/open-policy-agent/opa/bundle"
+	"github.com/open-policy-agent/opa/plugins"
+	"github.com/open-policy-agent/opa/rego"
+	"github.com/open-policy-agent/opa/storage"
+	"github.com/open-policy-agent/opa/storage/inmem"
+	iCache "github.com/open-policy-agent/opa/topdown/cache"
 )
 
 func TestGetRevisionLegacy(t *testing.T) {

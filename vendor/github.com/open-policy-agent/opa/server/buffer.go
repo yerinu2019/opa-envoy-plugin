@@ -7,10 +7,10 @@ package server
 import (
 	"time"
 
-	"github.com/yerinu2019/opa/ast"
-	"github.com/yerinu2019/opa/metrics"
-	"github.com/yerinu2019/opa/storage"
-	"github.com/yerinu2019/opa/topdown"
+	"github.com/open-policy-agent/opa/ast"
+	"github.com/open-policy-agent/opa/metrics"
+	"github.com/open-policy-agent/opa/storage"
+	"github.com/open-policy-agent/opa/topdown"
 )
 
 // Buffer defines an interface for recording decisions.

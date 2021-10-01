@@ -18,15 +18,15 @@ import (
 
 	"github.com/olekukonko/tablewriter"
 
-	"github.com/yerinu2019/opa/ast"
-	"github.com/yerinu2019/opa/cover"
-	"github.com/yerinu2019/opa/format"
-	"github.com/yerinu2019/opa/loader"
-	"github.com/yerinu2019/opa/metrics"
-	"github.com/yerinu2019/opa/profiler"
-	"github.com/yerinu2019/opa/rego"
-	"github.com/yerinu2019/opa/storage"
-	"github.com/yerinu2019/opa/topdown"
+	"github.com/open-policy-agent/opa/ast"
+	"github.com/open-policy-agent/opa/cover"
+	"github.com/open-policy-agent/opa/format"
+	"github.com/open-policy-agent/opa/loader"
+	"github.com/open-policy-agent/opa/metrics"
+	"github.com/open-policy-agent/opa/profiler"
+	"github.com/open-policy-agent/opa/rego"
+	"github.com/open-policy-agent/opa/storage"
+	"github.com/open-policy-agent/opa/topdown"
 )
 
 // DefaultProfileSortOrder is the default ordering unless something is specified in the CLI

@@ -18,9 +18,9 @@ import (
 	"os"
 	"strings"
 
-	"github.com/yerinu2019/opa/ast"
-	"github.com/yerinu2019/opa/topdown/builtins"
-	"github.com/yerinu2019/opa/util"
+	"github.com/open-policy-agent/opa/ast"
+	"github.com/open-policy-agent/opa/topdown/builtins"
+	"github.com/open-policy-agent/opa/util"
 )
 
 const (

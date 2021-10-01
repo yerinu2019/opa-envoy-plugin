@@ -5,12 +5,12 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/yerinu2019/opa/ast"
-	"github.com/yerinu2019/opa/bundle"
-	"github.com/yerinu2019/opa/metrics"
-	"github.com/yerinu2019/opa/rego"
-	"github.com/yerinu2019/opa/storage"
-	iCache "github.com/yerinu2019/opa/topdown/cache"
+	"github.com/open-policy-agent/opa/ast"
+	"github.com/open-policy-agent/opa/bundle"
+	"github.com/open-policy-agent/opa/metrics"
+	"github.com/open-policy-agent/opa/rego"
+	"github.com/open-policy-agent/opa/storage"
+	iCache "github.com/open-policy-agent/opa/topdown/cache"
 	"github.com/sirupsen/logrus"
 )
 

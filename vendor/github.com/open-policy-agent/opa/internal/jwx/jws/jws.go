@@ -27,10 +27,10 @@ import (
 	"io"
 	"strings"
 
-	"github.com/yerinu2019/opa/internal/jwx/jwa"
-	"github.com/yerinu2019/opa/internal/jwx/jwk"
-	"github.com/yerinu2019/opa/internal/jwx/jws/sign"
-	"github.com/yerinu2019/opa/internal/jwx/jws/verify"
+	"github.com/open-policy-agent/opa/internal/jwx/jwa"
+	"github.com/open-policy-agent/opa/internal/jwx/jwk"
+	"github.com/open-policy-agent/opa/internal/jwx/jws/sign"
+	"github.com/open-policy-agent/opa/internal/jwx/jws/verify"
 
 	"github.com/pkg/errors"
 )

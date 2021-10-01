@@ -10,8 +10,8 @@ import (
 	"fmt"
 	"runtime"
 
-	"github.com/yerinu2019/opa/storage"
-	"github.com/yerinu2019/opa/version"
+	"github.com/open-policy-agent/opa/storage"
+	"github.com/open-policy-agent/opa/version"
 )
 
 var versionPath = storage.MustParsePath("/system/version")

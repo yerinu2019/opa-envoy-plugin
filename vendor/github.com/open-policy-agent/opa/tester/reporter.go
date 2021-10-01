@@ -11,10 +11,10 @@ import (
 	"io"
 	"strings"
 
-	"github.com/yerinu2019/opa/topdown"
+	"github.com/open-policy-agent/opa/topdown"
 
-	"github.com/yerinu2019/opa/ast"
-	"github.com/yerinu2019/opa/cover"
+	"github.com/open-policy-agent/opa/ast"
+	"github.com/open-policy-agent/opa/cover"
 )
 
 // Reporter defines the interface for reporting test results.

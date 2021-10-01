@@ -11,8 +11,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/yerinu2019/opa/internal/deepcopy"
-	"github.com/yerinu2019/opa/util"
+	"github.com/open-policy-agent/opa/internal/deepcopy"
+	"github.com/open-policy-agent/opa/util"
 )
 
 type maskOP string

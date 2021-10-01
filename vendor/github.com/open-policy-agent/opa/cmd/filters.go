@@ -7,7 +7,7 @@ package cmd
 import (
 	"os"
 
-	"github.com/yerinu2019/opa/loader"
+	"github.com/open-policy-agent/opa/loader"
 )
 
 type loaderFilter struct {

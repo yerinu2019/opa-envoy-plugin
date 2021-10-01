@@ -5,7 +5,7 @@
 package topdown
 
 import (
-	"github.com/yerinu2019/opa/ast"
+	"github.com/open-policy-agent/opa/ast"
 )
 
 func evalWalk(bctx BuiltinContext, args []*ast.Term, iter func(*ast.Term) error) error {

@@ -8,13 +8,13 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/yerinu2019/opa/keys"
+	"github.com/open-policy-agent/opa/keys"
 
-	"github.com/yerinu2019/opa/bundle"
+	"github.com/open-policy-agent/opa/bundle"
 
-	"github.com/yerinu2019/opa/ast"
-	"github.com/yerinu2019/opa/download"
-	"github.com/yerinu2019/opa/util"
+	"github.com/open-policy-agent/opa/ast"
+	"github.com/open-policy-agent/opa/download"
+	"github.com/open-policy-agent/opa/util"
 )
 
 // Config represents the configuration for the discovery feature.

@@ -20,7 +20,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/yerinu2019/opa/logging"
+	"github.com/open-policy-agent/opa/logging"
 )
 
 const (
