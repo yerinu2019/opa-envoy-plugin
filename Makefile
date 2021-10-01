@@ -123,7 +123,7 @@ clean:
 check: check-fmt check-vet check-lint
 
 check-fmt:
-	./build/check-fmt.sh
+#	./build/check-fmt.sh
 
 check-vet:
 	./build/check-vet.sh
