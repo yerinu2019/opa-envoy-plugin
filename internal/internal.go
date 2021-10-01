@@ -29,9 +29,6 @@ import (
 	"google.golang.org/grpc/reflection"
 	"google.golang.org/protobuf/reflect/protoregistry"
 
-	"github.com/yerinu2019/opa-envoy-plugin/envoyauth"
-	internal_util "github.com/yerinu2019/opa-envoy-plugin/internal/util"
-	"github.com/yerinu2019/opa-envoy-plugin/opa/decisionlog"
 	"github.com/open-policy-agent/opa/ast"
 	"github.com/open-policy-agent/opa/plugins"
 	"github.com/open-policy-agent/opa/rego"
@@ -39,6 +36,9 @@ import (
 	"github.com/open-policy-agent/opa/storage"
 	iCache "github.com/open-policy-agent/opa/topdown/cache"
 	"github.com/open-policy-agent/opa/util"
+	"github.com/yerinu2019/opa-envoy-plugin/envoyauth"
+	internal_util "github.com/yerinu2019/opa-envoy-plugin/internal/util"
+	"github.com/yerinu2019/opa-envoy-plugin/opa/decisionlog"
 )
 
 const defaultAddr = ":9191"
@@ -321,7 +321,7 @@ func (p *envoyExtAuthzGrpcServer) check(ctx context.Context, req interface{}) (*
 		evalErr = err
 		return nil, stop, err
 	}
-
+	
 	resp := &ext_authz_v3.CheckResponse{}
 
 	allowed, err := result.IsAllowed()

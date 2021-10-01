@@ -106,6 +106,32 @@ const exampleAllowedRequestParsedPath = `{
 	}
   }`
 
+  const exampleAllowedXfccRequest = `{
+	"attributes": {
+	  "request": {
+		"http": {
+		  "headers": {
+			"X-Forwarded-Client-Cert": 
+			"By=spiffe://cluster.local/ns/api-istio/sa/api1;Hash=86df29e74ec819ebd2eba49bb5fc37e54a084f6b8de44d4c123f4a95056d7c2d;Subject=\"\";URI=spiffe://cluster.local/ns/clientns/sa/client1",
+		  }
+		}
+	  }
+	}
+  }`
+
+  const exampleDeniedXfccRequest = `{
+	"attributes": {
+	  "request": {
+		"http": {
+		  "headers": {
+			"X-Forwarded-Client-Cert": 
+			"By=spiffe://cluster.local/ns/api-istio/sa/api1;Hash=86df29e74ec819ebd2eba49bb5fc37e54a084f6b8de44d4c123f4a95056d7c2d;Subject=\"\";URI=spiffe://cluster.local/ns/clientns/sa/client2",
+		  }
+		}
+	  }
+	}
+  }`
+
 const exampleAllowedRequestParsedBody = `{
 	"attributes": {
 	  "request": {
@@ -1017,6 +1043,77 @@ func TestConfigWithProtoDescriptor(t *testing.T) {
 	}
 }
 
+func TestCheckAllowXfcc(t *testing.T) {
+
+	// Example Envoy Check Request for input:
+	// curl --user  bob:password  -o /dev/null -s -w "%{http_code}\n" http://${GATEWAY_URL}/api/v1/products
+
+	var req ext_authz.CheckRequest
+	if err := util.Unmarshal([]byte(exampleAllowedXfccRequest), &req); err != nil {
+		panic(err)
+	}
+
+	server := testAuthzServerWithXfccHeader(&testPlugin{}, false)
+	ctx := context.Background()
+	output, err := server.Check(ctx, &req)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if output.Status.Code != int32(code.Code_OK) {
+		t.Fatalf("Expected request to be allowed but got: %v", output)
+	}
+
+	response := output.GetOkResponse()
+	if response == nil {
+		t.Fatal("Expected OkHttpResponse struct but got nil")
+	}
+}
+
+func TestCheckDenyXfcc(t *testing.T) {
+
+	var req ext_authz.CheckRequest
+	if err := util.Unmarshal([]byte(exampleDeniedXfccRequest), &req); err != nil {
+		panic(err)
+	}
+
+	server := testAuthzServerWithXfccHeader(&testPlugin{}, false)
+	ctx := context.Background()
+	output, err := server.Check(ctx, &req)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if output.Status.Code != int32(code.Code_PERMISSION_DENIED) {
+		t.Fatalf("Expected request to be denied but got: %v", output)
+	}
+
+	response := output.GetDeniedResponse()
+	if response == nil {
+		t.Fatal("Expected DeniedHttpResponse struct but got nil")
+	}
+
+	headers := response.GetHeaders()
+	if len(headers) != 2 {
+		t.Fatalf("Expected two headers but got %v", len(headers))
+	}
+
+	expectedHeaders := make(map[string]string)
+	expectedHeaders[http.CanonicalHeaderKey("foo")] = "bar"
+	expectedHeaders[http.CanonicalHeaderKey("baz")] = "taz"
+
+	assertHeaders(t, headers, expectedHeaders)
+
+	if response.GetBody() != "Unauthorized Request" {
+		t.Fatalf("Expected response body \"Unauthorized Request\" but got %v", response.GetBody())
+	}
+
+	actualHTTPStatusCode := response.GetStatus().GetCode().String()
+	if actualHTTPStatusCode != "MovedPermanently" {
+		t.Fatalf("Expected http status code \"MovedPermanently\" but got %v", actualHTTPStatusCode)
+	}
+}
+
 func TestCheckAllowObjectDecision(t *testing.T) {
 
 	// Example Envoy Check Request for input:
@@ -1306,6 +1403,34 @@ func testAuthzServerWithModule(module string, path string, customLogger plugins.
 	}
 	s := New(m, &cfg)
 	return s.(*envoyExtAuthzGrpcServer)
+}
+
+func testAuthzServerWithXfccHeader(customLogger plugins.Plugin, dryRun bool) *envoyExtAuthzGrpcServer {
+	module := `
+		package envoy.authz
+		
+		default allow = {
+			"allowed": false,
+			"headers": {"foo": "bar", "baz": "taz"},
+			"body": "Unauthorized Request",
+			"http_status": 301
+		}
+
+		allow = response {
+		    response := {
+				"allowed": checkXfcc,
+		    }
+		}
+
+		checkXfcc {
+			contains(input.attributes.request.http.headers["X-Forwarded-Client-Cert"], api_whitelist[_])
+		}
+
+		api_whitelist = ["spiffe://cluster.local/ns/clientns/sa/client1",
+			"spiffe://cluster.local/ns/clientns/sa/client3",
+		]
+	`
+	return testAuthzServerWithModule(module, "envoy/authz/allow", customLogger, dryRun)
 }
 
 func testAuthzServerWithObjectDecision(customLogger plugins.Plugin, dryRun bool) *envoyExtAuthzGrpcServer {
