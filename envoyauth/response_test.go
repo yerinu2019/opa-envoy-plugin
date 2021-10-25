@@ -5,6 +5,50 @@ import (
 	"testing"
 )
 
+func TestIsLogSuppressed(t *testing.T) {
+	input := make(map[string]interface{})
+	er := EvalResult{
+		Decision: input,
+	}
+	var err error
+	var result bool
+
+	result, err = er.IsLogSuppressed()
+	if err != nil {
+		t.Fatalf("Expected no error but got %v", err)
+	}
+	if result == true {
+		t.Fatalf("Expected value for IsLogSuppressed %v but got %v", false, result)
+	}
+
+	input["suppress_decision_log"] = 1
+	result, err = er.IsLogSuppressed()
+	if err == nil {
+		t.Fatalf("Expected error but got %v", err)
+	}
+	if result == true {
+		t.Fatalf("Expected value for IsLogSuppressed %v but got %v", false, result)
+	}
+
+	input["suppress_decision_log"] = false
+	result, err = er.IsLogSuppressed()
+	if err != nil {
+		t.Fatalf("Expected no error but got %v", err)
+	}
+	if result == true {
+		t.Fatalf("Expected value for IsLogSuppressed %v but got %v", false, result)
+	}
+
+	input["suppress_decision_log"] = true
+	result, err = er.IsLogSuppressed()
+	if err != nil {
+		t.Fatalf("Expected no error but got %v", err)
+	}
+	if result != true {
+		t.Fatalf("Expected value for IsLogSuppressed %v but got %v", true, result)
+	}
+}
+
 func TestIsAllowed(t *testing.T) {
 
 	input := make(map[string]interface{})

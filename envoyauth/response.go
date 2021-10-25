@@ -79,6 +79,26 @@ func (result *EvalResult) invalidDecisionErr() error {
 	return fmt.Errorf("illegal value for policy evaluation result: %T", result.Decision)
 }
 
+func (result *EvalResult) IsLogSuppressed() (bool, error) {
+	switch decision := result.Decision.(type) {
+	case bool:
+		return false, nil
+	case map[string]interface{}:
+		var val interface{}
+		var ok, suppress bool
+
+		if val, ok = decision["suppress_decision_log"]; !ok {
+			return false, nil
+		}
+
+		if suppress, ok = val.(bool); !ok {
+			return false, fmt.Errorf("suppress_decision_log type assertion error")
+		}
+		return suppress, nil
+	}
+	return false, result.invalidDecisionErr()
+}
+
 // IsAllowed - Returns if the decision is representing an "allow" depending on the decision structure.
 // Returns an error if the decision structure is invalid
 func (result *EvalResult) IsAllowed() (bool, error) {

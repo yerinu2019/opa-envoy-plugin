@@ -289,14 +289,18 @@ func (p *envoyExtAuthzGrpcServer) check(ctx context.Context, req interface{}) (*
 
 	stop := func() *rpc_status.Status {
 		stopeval()
-		logErr := p.log(ctx, input, result, err)
-		if logErr != nil {
-			_ = txnClose(ctx, logErr) // Ignore error
-			return &rpc_status.Status{
-				Code:    int32(code.Code_UNKNOWN),
-				Message: logErr.Error(),
+		var suppress bool
+		suppress, _ = result.IsLogSuppressed()
+		if (suppress == false) {
+			logErr := p.log(ctx, input, result, err)
+			if logErr != nil {
+				_ = txnClose(ctx, logErr) // Ignore error
+				return &rpc_status.Status{
+					Code:    int32(code.Code_UNKNOWN),
+					Message: logErr.Error(),
+				}
 			}
-		}
+		}		
 		_ = txnClose(ctx, evalErr) // Ignore error
 		return nil
 	}

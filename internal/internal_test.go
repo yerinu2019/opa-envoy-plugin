@@ -1408,6 +1408,9 @@ func testAuthzServerWithModule(module string, path string, customLogger plugins.
 func testAuthzServerWithXfccHeader(customLogger plugins.Plugin, dryRun bool) *envoyExtAuthzGrpcServer {
 	module := `
 		package envoy.authz
+
+		import input.attributes.request.http as http_request
+    	import input.parsed_path
 		
 		default allow = {
 			"allowed": false,
@@ -1416,9 +1419,33 @@ func testAuthzServerWithXfccHeader(customLogger plugins.Plugin, dryRun bool) *en
 			"http_status": 301
 		}
 
-		allow = response {
+		# Allow health-checks
+		allow {
+			split(http_request.host, ":")[1] == "8282"
+		}
+		allow {
+			split(http_request.host, ":")[1] == "15021"
+		}
+		allow {
+			parsed_path[0] == "health"
+			http_request.method == "GET"
+		}
+		allow {
+			parsed_path[0] == "healthz"
+			http_request.method == "GET"
+		}
+
+		allow = response {	    
 		    response := {
 				"allowed": checkXfcc,
+				"body": "Hello World!!!",
+		    }
+		}
+
+		deny = response {	    
+		    response := {
+				"allowed": checkXfcc,
+				"body": "Hello World!!!",
 		    }
 		}
 
