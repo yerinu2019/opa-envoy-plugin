@@ -856,7 +856,8 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 		return nil
 	}
 
-	fmt.Printf("Mask rule: %v\n", rs[0].Expressions[0].Value)
+	fmt.Printf("Mask rule type: %T\n", rs[0].Expressions[0].Value)
+	fmt.Printf("Mask rule value: %v\n", rs[0].Expressions[0].Value)
 	switch m := rs[0].Expressions[0].Value.(type) {
 	case map[string]interface{}:
 		for k, v := range m {
