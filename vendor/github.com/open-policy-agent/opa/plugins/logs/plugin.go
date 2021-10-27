@@ -856,6 +856,7 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 		return nil
 	}
 
+	fmt.Printf("Mask rule: %+v", rs[0].Expressions[0].Value)
 	mRuleSet, err := newMaskRuleSet(
 		rs[0].Expressions[0].Value,
 		func(mRule *maskRule, err error) {
