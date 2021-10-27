@@ -815,6 +815,7 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 		if p.mask == nil {
 
 			query := ast.NewBody(ast.NewExpr(ast.NewTerm(p.config.maskDecisionRef)))
+			fmt.Printf("mask query: %v\n", query)
 
 			r := rego.New(
 				rego.ParsedQuery(query),
@@ -823,6 +824,7 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 				rego.Transaction(txn),
 				rego.Runtime(p.manager.Info),
 			)
+			fmt.Printf("mask rego: %v\n", r)
 
 			pq, err := r.PrepareForEval(context.Background())
 			if err != nil {
@@ -831,6 +833,7 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 
 			p.mask = &pq
 		}
+		fmt.Printf("prepared mask eval query: %v\n", p.mask)
 
 		return *p.mask, nil
 	}()
@@ -849,6 +852,7 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 		rego.EvalParsedInput(input),
 		rego.EvalTransaction(txn),
 	)
+	fmt.Printf("mask eval result: %v\n", rs)
 
 	if err != nil {
 		return errors.Wrap(err, "mask Eval error")
@@ -860,7 +864,7 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 	fmt.Printf("Mask rule value: %v\n", rs[0].Expressions[0].Value)
 	switch m := rs[0].Expressions[0].Value.(type) {
 	case map[string]interface {}:
-		fmt.Printf("Mask rule size: %v", len(m))
+		fmt.Printf("Mask rule size: %v\n", len(m))
 		for k, v := range m {
 			fmt.Printf("key: %v, value: %v", k, v)
 		}
