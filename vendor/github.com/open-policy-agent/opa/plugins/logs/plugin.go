@@ -564,7 +564,7 @@ func (p *Plugin) Log(ctx context.Context, decision *server.Info) error {
 	if err != nil {
 		// TODO(tsandall): see note below about error handling.
 		fmt.Printf("with stack trace => %+v \n\n", err)
-		p.logger.Error("Log event masking failed: %+v.", err)
+		p.logger.Error("Log event masking failed: %v.", err)
 		return nil
 	}
 

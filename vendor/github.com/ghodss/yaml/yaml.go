@@ -7,6 +7,7 @@ import (
 	"reflect"
 	"strconv"
 
+	"github.com/pkg/errors"
 	"gopkg.in/yaml.v2"
 )
 
@@ -79,7 +80,7 @@ func yamlToJSON(y []byte, jsonTarget *reflect.Value) ([]byte, error) {
 	var yamlObj interface{}
 	err := yaml.Unmarshal(y, &yamlObj)
 	if err != nil {
-		return nil, err
+		return nil, errors.Wrap(err, "yaml unmarshal error")
 	}
 
 	// YAML objects are not completely compatible with JSON objects (e.g. you

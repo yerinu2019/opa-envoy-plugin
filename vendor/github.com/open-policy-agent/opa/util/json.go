@@ -11,6 +11,7 @@ import (
 	"io"
 	"reflect"
 
+	"github.com/pkg/errors"
 	"github.com/ghodss/yaml"
 )
 
@@ -23,7 +24,7 @@ func UnmarshalJSON(bs []byte, x interface{}) (err error) {
 	buf := bytes.NewBuffer(bs)
 	decoder := NewJSONDecoder(buf)
 	if err := decoder.Decode(x); err != nil {
-		return err
+		return errors.Wrap(err, "decode error")
 	}
 
 	// Since decoder.Decode validates only the first json structure in bytes,
@@ -33,7 +34,7 @@ func UnmarshalJSON(bs []byte, x interface{}) (err error) {
 		return fmt.Errorf("error: invalid character '%s' after top-level value", tok)
 	}
 	if err != nil && err != io.EOF {
-		return err
+		return errors.Wrap(err, "token error")
 	}
 	return nil
 }
@@ -107,7 +108,7 @@ func Reference(x interface{}) *interface{} {
 func Unmarshal(bs []byte, v interface{}) error {
 	bs, err := yaml.YAMLToJSON(bs)
 	if err != nil {
-		return err
+		return errors.Wrap(err, "yamlToJson error")
 	}
 	return UnmarshalJSON(bs, v)
 }
