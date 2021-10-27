@@ -563,8 +563,8 @@ func (p *Plugin) Log(ctx context.Context, decision *server.Info) error {
 	err := p.maskEvent(ctx, decision.Txn, &event)
 	if err != nil {
 		// TODO(tsandall): see note below about error handling.
-		fmt.Printf("with stack trace => %+v \n\n", errors.Wrap(err, "Context Info using Wrap"))
-		p.logger.Error("Log event masking failed: %v.", err)
+		fmt.Printf("with stack trace => %+v \n\n", err)
+		p.logger.Error("Log event masking failed: %+v.", err)
 		return nil
 	}
 
@@ -826,7 +826,7 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 
 			pq, err := r.PrepareForEval(context.Background())
 			if err != nil {
-				return rego.PreparedEvalQuery{}, err
+				return rego.PreparedEvalQuery{}, errors.Wrap(err, "PrepareForEval error")
 			}
 
 			p.mask = &pq

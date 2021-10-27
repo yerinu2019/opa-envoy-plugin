@@ -8,12 +8,13 @@ package rego
 import (
 	"bytes"
 	"context"
-	"errors"
+	//"errors"
 	"fmt"
 	"io"
 	"strings"
 	"time"
 
+	"github.com/pkg/errors"
 	"github.com/open-policy-agent/opa/ast"
 	"github.com/open-policy-agent/opa/bundle"
 	bundleUtils "github.com/open-policy-agent/opa/internal/bundle"
@@ -1404,14 +1405,14 @@ func (r *Rego) PrepareForEval(ctx context.Context, opts ...PrepareOption) (Prepa
 		pr, err := r.partialResult(ctx, pCfg)
 		if err != nil {
 			_ = txnClose(ctx, err) // Ignore error
-			return PreparedEvalQuery{}, err
+			return PreparedEvalQuery{}, errors.Wrap(err, "partialResult error")
 		}
 
 		// Prepare the new query using the result of partial evaluation
 		pq, err := pr.Rego(Transaction(r.txn)).PrepareForEval(ctx)
 		txnErr := txnClose(ctx, err)
 		if err != nil {
-			return pq, err
+			return pq, errors.Wrap(err, "PrepareForEval error")
 		}
 		return pq, txnErr
 	}
@@ -1428,7 +1429,7 @@ func (r *Rego) PrepareForEval(ctx context.Context, opts ...PrepareOption) (Prepa
 	})
 	if err != nil {
 		_ = txnClose(ctx, err) // Ignore error
-		return PreparedEvalQuery{}, err
+		return PreparedEvalQuery{}, errors.Wrap(err, "prepare error")
 	}
 
 	if r.target == targetWasm {
@@ -1474,7 +1475,7 @@ func (r *Rego) PrepareForEval(ctx context.Context, opts ...PrepareOption) (Prepa
 
 	txnErr := txnClose(ctx, err) // Always call closer
 	if err != nil {
-		return PreparedEvalQuery{}, err
+		return PreparedEvalQuery{}, errors.Wrap(err, "???")
 	}
 	if txnErr != nil {
 		return PreparedEvalQuery{}, txnErr
