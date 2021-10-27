@@ -79,6 +79,8 @@ func (result *EvalResult) invalidDecisionErr() error {
 	return fmt.Errorf("illegal value for policy evaluation result: %T", result.Decision)
 }
 
+// IsLogSuppressed - Returns true if the decision has true "suppress_decision_log".
+// Returns an error if the decision structure is invalid
 func (result *EvalResult) IsLogSuppressed() (bool, error) {
 	switch decision := result.Decision.(type) {
 	case bool:
