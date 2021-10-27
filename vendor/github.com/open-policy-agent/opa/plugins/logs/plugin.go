@@ -836,12 +836,12 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 	}()
 
 	if err != nil {
-		return err
+		return errors.Wrap(err, "???1")
 	}
 
 	input, err := event.AST()
 	if err != nil {
-		return err
+		return errors.Wrap(err, "AST error")
 	}
 
 	rs, err := mask.Eval(
@@ -851,7 +851,7 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 	)
 
 	if err != nil {
-		return err
+		return errors.Wrap(err, "mask Eval error")
 	} else if len(rs) == 0 {
 		return nil
 	}
@@ -863,7 +863,7 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 		},
 	)
 	if err != nil {
-		return err
+		return errors.Wrap(err, "???2")
 	}
 
 	mRuleSet.Mask(event)
