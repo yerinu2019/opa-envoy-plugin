@@ -852,7 +852,9 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 		rego.EvalParsedInput(input),
 		rego.EvalTransaction(txn),
 	)
-	fmt.Printf("mask eval result: %v\n", rs)
+	fmt.Printf("mask eval result size: %v", len(rs))
+	fmt.Printf("mask eval result in Go format: %#v\n", rs)
+	fmt.Printf("mask eval result with fields: %+v\n", rs)
 
 	if err != nil {
 		return errors.Wrap(err, "mask Eval error")
@@ -860,6 +862,7 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 		return nil
 	}
 
+	fmt.Printf("rs[0].expression size: %v\n", len(rs[0].Expressions))
 	fmt.Printf("Mask rule type: %T\n", rs[0].Expressions[0].Value)
 	fmt.Printf("Mask rule value: %v\n", rs[0].Expressions[0].Value)
 	switch m := rs[0].Expressions[0].Value.(type) {
