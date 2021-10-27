@@ -863,7 +863,7 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 		},
 	)
 	if err != nil {
-		return errors.Wrap(err, "???2")
+		return err
 	}
 
 	mRuleSet.Mask(event)

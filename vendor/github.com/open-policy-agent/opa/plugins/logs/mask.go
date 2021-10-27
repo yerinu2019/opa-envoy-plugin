@@ -11,6 +11,8 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/pkg/errors"
+
 	"github.com/open-policy-agent/opa/internal/deepcopy"
 	"github.com/open-policy-agent/opa/util"
 )
@@ -267,7 +269,7 @@ func (r maskRule) mkdirp(node map[string]interface{}, path []string, value inter
 func newMaskRuleSet(rv interface{}, onRuleError func(*maskRule, error)) (*maskRuleSet, error) {
 	bs, err := json.Marshal(rv)
 	if err != nil {
-		return nil, err
+		return nil, errors.Wrap(err, "json marshal error")
 	}
 	var mRuleSet = &maskRuleSet{
 		OnRuleError: onRuleError,
@@ -275,7 +277,7 @@ func newMaskRuleSet(rv interface{}, onRuleError func(*maskRule, error)) (*maskRu
 	var rawRules []interface{}
 
 	if err := util.Unmarshal(bs, &rawRules); err != nil {
-		return nil, err
+		return nil, errors.Wrap(err, "json unmarshal error")
 	}
 
 	for _, iface := range rawRules {
@@ -287,7 +289,7 @@ func newMaskRuleSet(rv interface{}, onRuleError func(*maskRule, error)) (*maskRu
 			// structured mask format is not provided
 			rule, err := newMaskRule(v)
 			if err != nil {
-				return nil, err
+				return nil, errors.Wrap(err, "string newMaskRule error")
 			}
 
 			mRuleSet.Rules = append(mRuleSet.Rules, rule)
@@ -296,13 +298,13 @@ func newMaskRuleSet(rv interface{}, onRuleError func(*maskRule, error)) (*maskRu
 
 			bs, err := json.Marshal(v)
 			if err != nil {
-				return nil, err
+				return nil, errors.Wrap(err, "interface json marshal error")
 			}
 
 			rule := &maskRule{}
 
 			if err := util.Unmarshal(bs, rule); err != nil {
-				return nil, err
+				return nil, errors.Wrap(err, "interface unmarshar error")
 			}
 
 			// use unmarshalled values to create new Mask Rule
@@ -314,7 +316,7 @@ func newMaskRuleSet(rv interface{}, onRuleError func(*maskRule, error)) (*maskRu
 			//   rule precedence A>B
 
 			if err != nil {
-				return nil, err
+				return nil, errors.Wrap(err, "interface newMaskRule error")
 			}
 
 			mRuleSet.Rules = append(mRuleSet.Rules, rule)
