@@ -852,7 +852,7 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 		rego.EvalParsedInput(input),
 		rego.EvalTransaction(txn),
 	)
-	fmt.Printf("mask eval result size: %v", len(rs))
+	fmt.Printf("mask eval result size: %v\n", len(rs))
 	fmt.Printf("mask eval result in Go format: %#v\n", rs)
 	fmt.Printf("mask eval result with fields: %+v\n", rs)
 
@@ -863,8 +863,10 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 	}
 
 	fmt.Printf("rs[0].expression size: %v\n", len(rs[0].Expressions))
+	fmt.Printf("Mask rule text: %+v\n", rs[0].Expressions[0].Text)
+	fmt.Printf("Mask rule location: %+v\n", rs[0].Expressions[0].Location)
 	fmt.Printf("Mask rule type: %T\n", rs[0].Expressions[0].Value)
-	fmt.Printf("Mask rule value: %v\n", rs[0].Expressions[0].Value)
+	fmt.Printf("Mask rule value: %+v\n", rs[0].Expressions[0].Value)
 	switch m := rs[0].Expressions[0].Value.(type) {
 	case map[string]interface {}:
 		fmt.Printf("Mask rule size: %v\n", len(m))
