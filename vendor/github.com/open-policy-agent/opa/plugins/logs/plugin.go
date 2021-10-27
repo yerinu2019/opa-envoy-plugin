@@ -563,6 +563,7 @@ func (p *Plugin) Log(ctx context.Context, decision *server.Info) error {
 	err := p.maskEvent(ctx, decision.Txn, &event)
 	if err != nil {
 		// TODO(tsandall): see note below about error handling.
+		fmt.Printf("with stack trace => %v \n\n", errors.Wrap(err, "Context Info using Wrap"))
 		p.logger.Error("Log event masking failed: %v.", err)
 		return nil
 	}

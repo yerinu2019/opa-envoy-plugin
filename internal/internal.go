@@ -376,15 +376,19 @@ func (p *envoyExtAuthzGrpcServer) check(ctx context.Context, req interface{}) (*
 		}
 	}
 
-	logrus.WithFields(logrus.Fields{
-		"query":               p.cfg.parsedQuery.String(),
-		"dry-run":             p.cfg.DryRun,
-		"decision":            result.Decision,
-		"err":                 err,
-		"txn":                 result.TxnID,
-		"metrics":             result.Metrics.All(),
-		"total_decision_time": time.Since(start),
-	}).Debug("Returning policy decision.")
+	var suppress bool
+	suppress, _ = result.IsLogSuppressed()
+	if (suppress == false) {
+		logrus.WithFields(logrus.Fields{
+			"query":               p.cfg.parsedQuery.String(),
+			"dry-run":             p.cfg.DryRun,
+			"decision":            result.Decision,
+			"err":                 err,
+			"txn":                 result.TxnID,
+			"metrics":             result.Metrics.All(),
+			"total_decision_time": time.Since(start),
+		}).Debug("Returning policy decision.")
+	}
 
 	// If dry-run mode, override the Status code to unconditionally Allow the request
 	// DecisionLogging should reflect what "would" have happened
