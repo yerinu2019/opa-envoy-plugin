@@ -842,13 +842,15 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 		return errors.Wrap(err, "???1")
 	}
 
+	fmt.Printf("mask event: %+v\n\n", event)
 	input, err := event.AST()
 	if err != nil {
 		return errors.Wrap(err, "AST error")
 	}
 
-	fmt.Printf("mask eval context: %+v\n", ctx)
-	fmt.Printf("mask eval input: %+v\n", input)
+	
+	fmt.Printf("mask eval context: %+v\n\n", ctx)
+	fmt.Printf("mask eval input: %+v\n\n", input)
 	fmt.Printf("mask eval transaction: %+v\n", txn)
 	rs, err := mask.Eval(
 		ctx,
