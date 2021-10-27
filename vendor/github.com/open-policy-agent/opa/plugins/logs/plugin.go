@@ -843,6 +843,7 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 	if err != nil {
 		return errors.Wrap(err, "AST error")
 	}
+	fmt.Printf("input: %v\n", input)
 
 	rs, err := mask.Eval(
 		ctx,
@@ -855,8 +856,9 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 	} else if len(rs) == 0 {
 		return nil
 	}
+	fmt.Printf("rs: %v\n", rs)
 
-	fmt.Printf("Mask rule: %+v", rs[0].Expressions[0].Value)
+	fmt.Printf("Mask rule: %v\n", rs[0].Expressions[0].Value)
 	mRuleSet, err := newMaskRuleSet(
 		rs[0].Expressions[0].Value,
 		func(mRule *maskRule, err error) {
