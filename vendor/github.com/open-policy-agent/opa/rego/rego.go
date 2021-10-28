@@ -1937,7 +1937,7 @@ func (r *Rego) evalWasm(ctx context.Context, ectx *EvalContext) (ResultSet, erro
 	return rs, err
 }
 
-func (r *Rego) generateResult(qr topdown.QueryResult, ectx *EvalContext) (Result, error)
+func (r *Rego) generateResult(qr topdown.QueryResult, ectx *EvalContext) (Result, error) {
 
 	rewritten := ectx.compiledQuery.compiler.RewrittenVars()
 
