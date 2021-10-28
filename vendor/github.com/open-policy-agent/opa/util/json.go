@@ -24,6 +24,7 @@ func UnmarshalJSON(bs []byte, x interface{}) (err error) {
 	buf := bytes.NewBuffer(bs)
 	decoder := NewJSONDecoder(buf)
 	if err := decoder.Decode(x); err != nil {
+		fmt.Printf("decoding %+v to %T\n\n", string(bs[:]), x)
 		return errors.Wrap(err, "decode error")
 	}
 
@@ -110,5 +111,6 @@ func Unmarshal(bs []byte, v interface{}) error {
 	if err != nil {
 		return errors.Wrap(err, "yamlToJson error")
 	}
+	fmt.Printf("YAMLToJSON result: %+v\n\n", string(bs[:]))
 	return UnmarshalJSON(bs, v)
 }

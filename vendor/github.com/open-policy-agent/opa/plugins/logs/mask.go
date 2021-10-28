@@ -276,6 +276,7 @@ func newMaskRuleSet(rv interface{}, onRuleError func(*maskRule, error)) (*maskRu
 	}
 	var rawRules []interface{}
 
+	fmt.Printf("json marshall result: %+v\n\n", string(bs[:]))
 	if err := util.Unmarshal(bs, &rawRules); err != nil {
 		return nil, errors.Wrap(err, "json unmarshal error")
 	}

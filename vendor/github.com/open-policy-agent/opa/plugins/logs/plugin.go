@@ -850,7 +850,7 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 
 	
 	fmt.Printf("mask eval context: %+v\n\n", ctx)
-	fmt.Printf("mask eval input: %+v\n\n", input)
+	//fmt.Printf("mask eval input: %+v\n\n", input)
 	fmt.Printf("mask eval transaction: %+v\n", txn)
 	rs, err := mask.Eval(
 		ctx,
@@ -870,14 +870,10 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 	fmt.Printf("rs[0].expression size: %v\n", len(rs[0].Expressions))
 	fmt.Printf("Mask rule text: %+v\n", rs[0].Expressions[0].Text)
 	fmt.Printf("Mask rule location: %+v\n", rs[0].Expressions[0].Location)
-	fmt.Printf("Mask rule type: %T\n", rs[0].Expressions[0].Value)
-	fmt.Printf("Mask rule value: %+v\n", rs[0].Expressions[0].Value)
 	switch m := rs[0].Expressions[0].Value.(type) {
 	case map[string]interface {}:
 		fmt.Printf("Mask rule size: %v\n", len(m))
-		for k, v := range m {
-			fmt.Printf("key: %v, value: %v", k, v)
-		}
+		fmt.Printf("Mask rules: %+v\n", m)
 	}
 	
 	mRuleSet, err := newMaskRuleSet(
