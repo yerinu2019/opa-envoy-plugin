@@ -266,11 +266,21 @@ func (r maskRule) mkdirp(node map[string]interface{}, path []string, value inter
 	return nil
 }
 
+func emptyMapToEmptyArray(bs []byte) []byte {
+	if string(bs[:]) == "{}" {
+		return []byte("[]")
+	}
+	return bs
+}
+
 func newMaskRuleSet(rv interface{}, onRuleError func(*maskRule, error)) (*maskRuleSet, error) {
-	bs, err := json.Marshal(rv)
+	ba, err := json.Marshal(rv)
 	if err != nil {
 		return nil, errors.Wrap(err, "json marshal error")
 	}
+	// empty set causes json unmarshall error. try with empty array
+	bs := emptyMapToEmptyArray(ba)
+
 	var mRuleSet = &maskRuleSet{
 		OnRuleError: onRuleError,
 	}
