@@ -378,7 +378,7 @@ func (p *envoyExtAuthzGrpcServer) check(ctx context.Context, req interface{}) (*
 
 	var suppress bool
 	suppress, _ = result.IsLogSuppressed()
-	if (suppress == false) {
+	if (!suppress) {
 		logrus.WithFields(logrus.Fields{
 			"query":               p.cfg.parsedQuery.String(),
 			"dry-run":             p.cfg.DryRun,
@@ -387,7 +387,7 @@ func (p *envoyExtAuthzGrpcServer) check(ctx context.Context, req interface{}) (*
 			"txn":                 result.TxnID,
 			"metrics":             result.Metrics.All(),
 			"total_decision_time": time.Since(start),
-		}).Debug("Returning policy decision.")
+		}).Error("Returning policy decision.")
 	}
 
 	// If dry-run mode, override the Status code to unconditionally Allow the request

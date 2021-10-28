@@ -815,7 +815,7 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 		if p.mask == nil {
 
 			query := ast.NewBody(ast.NewExpr(ast.NewTerm(p.config.maskDecisionRef)))
-			fmt.Printf("mask query: %+v\n", query)
+			fmt.Printf("mask query: %+v\n\n", query)
 
 			r := rego.New(
 				rego.ParsedQuery(query),
@@ -824,7 +824,7 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 				rego.Transaction(txn),
 				rego.Runtime(p.manager.Info),
 			)
-			fmt.Printf("mask rego: %+v\n", r)
+			fmt.Printf("mask rego: %+v\n\n", r)
 
 			pq, err := r.PrepareForEval(context.Background())
 			if err != nil {
@@ -833,7 +833,7 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 
 			p.mask = &pq
 		}
-		fmt.Printf("prepared mask eval query: %+v\n", p.mask)
+		fmt.Printf("prepared mask eval query: %+v\n\n", p.mask)
 
 		return *p.mask, nil
 	}()
