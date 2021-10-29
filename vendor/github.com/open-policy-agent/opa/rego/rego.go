@@ -1823,8 +1823,6 @@ func (r *Rego) eval(ctx context.Context, ectx *EvalContext) (ResultSet, error) {
 		return r.evalWasm(ctx, ectx)
 	}
 
-	var suppress = ectx.parsedInput.attributes.parsed_path[0] == "health"
-
 	q := topdown.NewQuery(ectx.compiledQuery.query).
 		WithQueryCompiler(ectx.compiledQuery.compiler).
 		WithCompiler(r.compiler).
@@ -1847,19 +1845,20 @@ func (r *Rego) eval(ctx context.Context, ectx *EvalContext) (ResultSet, error) {
 		q = q.WithQueryTracer(ectx.queryTracers[i])
 	}
 
+	var suppress = ectx.parsedInput == nil || strings.Contains(fmt.Sprintf("%v", ectx.parsedInput), "health")
 	if !suppress {
+		fmt.Printf("ectx.compiledQuery.query: %+v \n\n", ectx.compiledQuery.query)
 		fmt.Printf("ectx.parsedInput: %+v \n\n", ectx.parsedInput)
 	}
+	
 	
 	if ectx.parsedInput != nil {
 		q = q.WithInput(ast.NewTerm(ectx.parsedInput))
 	}
 
 	for i := range ectx.resolvers {
-		if !suppress {
-			fmt.Printf("resolver[%v].ref: %+v \n\n", i, ectx.resolvers[i].ref)
-			fmt.Printf("resolver[%v].r: %+v \n\n", i, ectx.resolvers[i].r)
-		}
+		fmt.Printf("resolver[%v].ref: %+v \n\n", i, ectx.resolvers[i].ref)
+		fmt.Printf("resolver[%v].r: %+v \n\n", i, ectx.resolvers[i].r)
 		
 		q = q.WithResolver(ectx.resolvers[i].ref, ectx.resolvers[i].r)
 	}
@@ -1875,11 +1874,6 @@ func (r *Rego) eval(ctx context.Context, ectx *EvalContext) (ResultSet, error) {
 
 	var rs ResultSet
 	err := q.Iter(ctx, func(qr topdown.QueryResult) error {
-		if (!suppress) {
-			fmt.Printf("qr: %+v \n\n", qr)
-			fmt.Printf("ectx: %+v \n\n", ectx)
-		}
-		
 		result, err := r.generateResult(qr, ectx)
 		if err != nil {
 			return err
@@ -1954,28 +1948,29 @@ func (r *Rego) evalWasm(ctx context.Context, ectx *EvalContext) (ResultSet, erro
 }
 
 func (r *Rego) generateResult(qr topdown.QueryResult, ectx *EvalContext) (Result, error) {
-	var suppress = qr["suppress_decision_log"]
-	if suppress == nil {
+	var term = qr["suppress_decision_log"] 
+	var suppress = term == nil || term.String() != "true" || ectx.parsedInput == nil
+	if !suppress {
 		fmt.Printf("qr: %+v \n\n", qr)
 		fmt.Printf("ectx: %+v \n\n", ectx)
-		fmt.Printf("extx.parsedInput: %+v \n\n", ectx.parsedInput)
+		fmt.Printf("ectx.parsedInput: %+v \n\n", ectx.parsedInput)
 	}
 	
 	rewritten := ectx.compiledQuery.compiler.RewrittenVars()
-	if suppress == nil {
+	if !suppress {
 		fmt.Printf("rewritten: %+v \n\n", rewritten)
 	}
 
 	result := newResult()
 	for k, term := range qr {
-		if suppress == nil {
+		if !suppress {
 			fmt.Printf("k: %+v \n\n", k)
 			fmt.Printf("term: %+v \n\n", term)
 		}
 		
 		v, err := r.generateJSON(term, ectx)
 
-		if suppress == mil {
+		if !suppress {
 			fmt.Printf("v: %+v \n\n", v)
 		}
 		
@@ -1993,7 +1988,7 @@ func (r *Rego) generateResult(qr topdown.QueryResult, ectx *EvalContext) (Result
 	}
 
 	for _, expr := range ectx.compiledQuery.query {
-		if (suppress == nil) {
+		if (!suppress) {
 			fmt.Printf("expr: %+v \n\n", expr)
 		}
 		
@@ -2001,7 +1996,7 @@ func (r *Rego) generateResult(qr topdown.QueryResult, ectx *EvalContext) (Result
 			continue
 		}
 
-		if suppress == nil {
+		if !suppress {
 			fmt.Printf("r.capture: %+v \n\n", r.capture)
 		}
 		
