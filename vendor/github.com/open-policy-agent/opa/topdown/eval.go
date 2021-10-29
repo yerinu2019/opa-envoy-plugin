@@ -2,12 +2,14 @@ package topdown
 
 import (
 	"context"
-	"errors"
+	//"errors"
 	"fmt"
 	"io"
 	"sort"
 	"strconv"
 	"strings"
+
+	"github.com/pkg/errors"
 
 	"github.com/open-policy-agent/opa/ast"
 	"github.com/open-policy-agent/opa/metrics"
@@ -257,10 +259,10 @@ func (e *eval) eval(iter evalIterator) error {
 func (e *eval) evalExpr(iter evalIterator) error {
 
 	if e.cancel != nil && e.cancel.Cancelled() {
-		return &Error{
+		return errors.Wrap(&Error{
 			Code:    CancelErr,
 			Message: "caller cancelled query execution",
-		}
+		}, fmt.Sprintf("e: %+v \n\n iter: %+v", e, iter))
 	}
 
 	if e.index >= len(e.query) {
