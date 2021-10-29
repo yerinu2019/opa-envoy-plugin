@@ -341,10 +341,12 @@ func newMaskRuleSet(rv interface{}, onRuleError func(*maskRule, error)) (*maskRu
 }
 
 func (rs maskRuleSet) Mask(event *EventV1) {
+	fmt.Printf("rs.Rules size: %d \n\n", len(rs.Rules))
 	for _, mRule := range rs.Rules {
 		// result must be deep copied if there are any mask rules
 		// targeting it, to avoid modifying the result sent
 		// to the consumer
+		fmt.Printf("mRule: %+v \n\n", mRule)
 		if mRule.escapedParts[0] == partResult && event.Result != nil && !rs.resultCopied {
 			resultCopy := deepcopy.DeepCopy(*event.Result)
 			event.Result = &resultCopy
