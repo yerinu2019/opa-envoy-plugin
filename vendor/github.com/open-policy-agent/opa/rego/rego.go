@@ -1849,6 +1849,11 @@ func (r *Rego) eval(ctx context.Context, ectx *EvalContext) (ResultSet, error) {
 	if !suppress {
 		fmt.Printf("ectx.compiledQuery.query: %+v \n\n", ectx.compiledQuery.query)
 		fmt.Printf("ectx.parsedInput: %+v \n\n", ectx.parsedInput)
+		fmt.Printf("r.store: %+v \n\n", r.store)
+		m, _ := storage.ReadOne(ctx, r.store, []string{"data", "system", "log", "mask"})
+		fmt.Printf("data.system.log.mask: %+v \n\n", m)
+		var policies, _ = r.store.ListPolicies(ctx, ectx.txn)
+		fmt.Printf("r.store.policies: %+v \n\n", policies)
 	}
 	
 	
