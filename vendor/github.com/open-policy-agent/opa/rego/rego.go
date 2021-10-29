@@ -1949,7 +1949,7 @@ func (r *Rego) evalWasm(ctx context.Context, ectx *EvalContext) (ResultSet, erro
 
 func (r *Rego) generateResult(qr topdown.QueryResult, ectx *EvalContext) (Result, error) {
 	var term = qr["suppress_decision_log"] 
-	var suppress = term.String() == "true" || ectx.parsedInput == nil
+	var suppress = (term != nil && term.Value != nil && term.String() == "true") || ectx.parsedInput == nil
 	if !suppress {
 		fmt.Printf("qr: %+v \n\n", qr)
 		fmt.Printf("ectx: %+v \n\n", ectx)
