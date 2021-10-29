@@ -1879,11 +1879,21 @@ func (r *Rego) eval(ctx context.Context, ectx *EvalContext) (ResultSet, error) {
 
 	var rs ResultSet
 	err := q.Iter(ctx, func(qr topdown.QueryResult) error {
+		if !suppress {
+			fmt.Printf("qr: %+v \n\n", qr)
+			fmt.Printf("ctx: %+v \n\n", ctx)
+		}
+
 		result, err := r.generateResult(qr, ectx)
 		if err != nil {
 			return err
 		}
+
 		rs = append(rs, result)
+		if !suppress {
+			fmt.Printf("rs: %+v \n\n", rs)
+			fmt.Printf("result: %+v \n\n", result)
+		}
 		return nil
 	})
 
