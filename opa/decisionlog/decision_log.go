@@ -3,6 +3,8 @@ package decisionlog
 import (
 	"context"
 
+	"github.com/pkg/errors"
+
 	"github.com/yerinu2019/opa-envoy-plugin/envoyauth"
 	"github.com/open-policy-agent/opa/ast"
 	"github.com/open-policy-agent/opa/plugins"
@@ -10,6 +12,7 @@ import (
 	"github.com/open-policy-agent/opa/server"
 	"github.com/open-policy-agent/opa/storage"
 	"github.com/open-policy-agent/opa/topdown"
+	"github.com/open-policy-agent/opa/util"
 )
 
 type internalError struct {
@@ -20,12 +23,23 @@ func (e *internalError) Error() string {
 	return e.Message
 }
 
+func getAstValue(str string) (ast.Value, error) {
+	var input interface{}
+	if err := util.UnmarshalJSON([]byte(str), &input); err != nil {
+		return nil, errors.Wrapf(err, "parameter contains malformed input document")
+	}
+	return ast.InterfaceToValue(input)
+}
+
 // LogDecision - Logs a decision log event
 func LogDecision(ctx context.Context, manager *plugins.Manager, info *server.Info, result *envoyauth.EvalResult, err error) error {
 	plugin := logs.Lookup(manager)
 	if plugin == nil {
 		return nil
 	}
+
+	mask := "[{\"/input/attributes/request/http/body\": [true]}, {\"/input/parsed_body\": [true]}]"
+	info.InputAST, err = getAstValue(mask)
 
 	info.Revision = result.Revision
 
