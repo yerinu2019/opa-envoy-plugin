@@ -9,6 +9,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/open-policy-agent/opa/topdown"
 	"math"
 	"math/rand"
 	"net/http"
@@ -856,6 +857,7 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 		ctx,
 		rego.EvalParsedInput(input),
 		rego.EvalTransaction(txn),
+		rego.EvalQueryTracer(topdown.NewBufferTracer()),
 	)
 	fmt.Printf("mask eval result size: %v\n", len(rs))
 	fmt.Printf("mask eval result in Go format: %#v\n", rs)

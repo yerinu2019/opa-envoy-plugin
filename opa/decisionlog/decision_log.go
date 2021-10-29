@@ -5,7 +5,6 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/yerinu2019/opa-envoy-plugin/envoyauth"
 	"github.com/open-policy-agent/opa/ast"
 	"github.com/open-policy-agent/opa/plugins"
 	"github.com/open-policy-agent/opa/plugins/logs"
@@ -13,6 +12,7 @@ import (
 	"github.com/open-policy-agent/opa/storage"
 	"github.com/open-policy-agent/opa/topdown"
 	"github.com/open-policy-agent/opa/util"
+	"github.com/yerinu2019/opa-envoy-plugin/envoyauth"
 )
 
 type internalError struct {
@@ -38,8 +38,8 @@ func LogDecision(ctx context.Context, manager *plugins.Manager, info *server.Inf
 		return nil
 	}
 
-	mask := "[{\"/input/attributes/request/http/body\": [true]}, {\"/input/parsed_body\": [true]}]"
-	info.InputAST, err = getAstValue(mask)
+	//mask := "[{\"/input/attributes/request/http/body\": [true]}, {\"/input/parsed_body\": [true]}]"
+	//info.InputAST, err = getAstValue(mask)
 
 	info.Revision = result.Revision
 

@@ -14,7 +14,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/pkg/errors"
 	"github.com/open-policy-agent/opa/ast"
 	"github.com/open-policy-agent/opa/bundle"
 	bundleUtils "github.com/open-policy-agent/opa/internal/bundle"
@@ -32,6 +31,7 @@ import (
 	"github.com/open-policy-agent/opa/topdown/cache"
 	"github.com/open-policy-agent/opa/types"
 	"github.com/open-policy-agent/opa/util"
+	"github.com/pkg/errors"
 )
 
 const (
@@ -1845,18 +1845,18 @@ func (r *Rego) eval(ctx context.Context, ectx *EvalContext) (ResultSet, error) {
 		q = q.WithQueryTracer(ectx.queryTracers[i])
 	}
 
+	//var tracer *topdown.BufferTracer
 	var suppress = ectx.parsedInput == nil || strings.Contains(fmt.Sprintf("%v", ectx.parsedInput), "health")
 	if !suppress {
 		fmt.Printf("ectx.compiledQuery.query: %+v \n\n", ectx.compiledQuery.query)
 		fmt.Printf("ectx.parsedInput: %+v \n\n", ectx.parsedInput)
 		fmt.Printf("r.store: %+v \n\n", r.store)
-		m, _ := storage.ReadOne(ctx, r.store, []string{"data", "system", "log", "mask"})
-		fmt.Printf("data.system.log.mask: %+v \n\n", m)
+		//m, _ := storage.ReadOne(ctx, r.store, []string{"data", "system", "log", "mask"})
+		//fmt.Printf("data.system.log.mask: %+v \n\n", m)
 		var policies, _ = r.store.ListPolicies(ctx, ectx.txn)
 		fmt.Printf("r.store.policies: %+v \n\n", policies)
 	}
-	
-	
+
 	if ectx.parsedInput != nil {
 		q = q.WithInput(ast.NewTerm(ectx.parsedInput))
 	}
