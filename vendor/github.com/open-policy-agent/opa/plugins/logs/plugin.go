@@ -850,7 +850,7 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 
 	
 	fmt.Printf("mask eval context: %+v\n\n", ctx)
-	//fmt.Printf("mask eval input: %+v\n\n", input)
+	fmt.Printf("mask eval input: %+v\n\n", input)
 	fmt.Printf("mask eval transaction: %+v\n", txn)
 	rs, err := mask.Eval(
 		ctx,
