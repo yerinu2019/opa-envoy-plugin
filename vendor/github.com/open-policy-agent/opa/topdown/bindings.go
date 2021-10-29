@@ -43,14 +43,10 @@ func (u *bindings) Iter(caller *bindings, iter func(*ast.Term, *ast.Term) error)
 
 	var err error
 
-	fmt.Printf("u.values: %+v \n\n", u.values)
 	u.values.Iter(func(k *ast.Term, v value) bool {
 		if err != nil {
 			return true
 		}
-		fmt.Printf("k: %+v \n\n", k)
-		fmt.Printf("v: %+v \n\n", v)
-		fmt.Printf("caller: %+v \n\n", caller)
 		err = iter(k, u.PlugNamespaced(k, caller))
 
 		return false
@@ -72,29 +68,20 @@ func (u *bindings) Plug(a *ast.Term) *ast.Term {
 }
 
 func (u *bindings) PlugNamespaced(a *ast.Term, caller *bindings) *ast.Term {
-	fmt.Printf("u: %+v \n\n", u)
 	if u != nil {
 		u.instr.startTimer(evalOpPlug)
-		fmt.Printf("a: %+v \n\n", a)
-		fmt.Printf("caller: %+v \n\n", caller)
 		t := u.plugNamespaced(a, caller)
-		fmt.Printf("t: %+v \n\n", t)
 		u.instr.stopTimer(evalOpPlug)
 		return t
 	}
 
-	fmt.Printf("u is nil \n\n")
 	return u.plugNamespaced(a, caller)
 }
 
 func (u *bindings) plugNamespaced(a *ast.Term, caller *bindings) *ast.Term {
-	fmt.Printf("a.Value: %+v \n\n", a.Value)
 	switch v := a.Value.(type) {
 	case ast.Var:
 		b, next := u.apply(a)
-		fmt.Printf("a: %+v \n\n", a)
-		fmt.Printf("b: %+v \n\n", b)
-		fmt.Printf("u: %+v \n\n", u)
 		if a != b || u != next {
 			return next.plugNamespaced(b, caller)
 		}
@@ -106,7 +93,6 @@ func (u *bindings) plugNamespaced(a *ast.Term, caller *bindings) *ast.Term {
 			arr[i] = u.plugNamespaced(v.Elem(i), caller)
 		}
 		cpy.Value = ast.NewArray(arr...)
-		fmt.Printf("cpy.Value: %+v \n\n", cpy.Value)
 		return &cpy
 	case ast.Object:
 		if a.IsGround() {
@@ -114,18 +100,14 @@ func (u *bindings) plugNamespaced(a *ast.Term, caller *bindings) *ast.Term {
 		}
 		cpy := *a
 		cpy.Value, _ = v.Map(func(k, v *ast.Term) (*ast.Term, *ast.Term, error) {
-			fmt.Printf("cpy.Value: %+v \n\n", cpy.Value)
 			return u.plugNamespaced(k, caller), u.plugNamespaced(v, caller), nil
 		})
-		fmt.Printf("cpy.Value: %+v \n\n", cpy.Value)
 		return &cpy
 	case ast.Set:
 		cpy := *a
 		cpy.Value, _ = v.Map(func(x *ast.Term) (*ast.Term, error) {
-			fmt.Printf("cpy.Value: %+v \n\n", cpy.Value)
 			return u.plugNamespaced(x, caller), nil
 		})
-		fmt.Printf("cpy.Value: %+v \n\n", cpy.Value)
 		return &cpy
 	case ast.Ref:
 		cpy := *a
@@ -134,7 +116,6 @@ func (u *bindings) plugNamespaced(a *ast.Term, caller *bindings) *ast.Term {
 			ref[i] = u.plugNamespaced(v[i], caller)
 		}
 		cpy.Value = ref
-		fmt.Printf("cpy.Value: %+v \n\n", cpy.Value)
 		return &cpy
 	}
 	return a
@@ -189,7 +170,6 @@ func (u *bindings) String() string {
 }
 
 func (u *bindings) namespaceVar(v *ast.Term, caller *bindings) *ast.Term {
-	fmt.Printf("v.Value: %+v \n\n", v.Value)
 	name, ok := v.Value.(ast.Var)
 	if !ok {
 		panic("illegal value")

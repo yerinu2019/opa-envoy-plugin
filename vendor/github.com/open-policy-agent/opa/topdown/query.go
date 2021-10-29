@@ -3,7 +3,6 @@ package topdown
 import (
 	"context"
 	"crypto/rand"
-	"fmt"
 	"io"
 	"sort"
 	"time"
@@ -436,15 +435,10 @@ func (q *Query) Iter(ctx context.Context, iter func(QueryResult) error) error {
 		builtinErrors:          &builtinErrors{},
 	}
 	e.caller = e
-	fmt.Printf("ctx: %+v \n\n", ctx)
-	fmt.Printf("e: %+v \n\n", e)
 	q.metrics.Timer(metrics.RegoQueryEval).Start()
 	err := e.Run(func(e *eval) error {
-		fmt.Printf("e.bindings: %+v \n\n", e.bindings)
 		qr := QueryResult{}
 		_ = e.bindings.Iter(nil, func(k, v *ast.Term) error {
-			fmt.Printf("k.Value.(ast.Var): %+v \n\n", k.Value.(ast.Var))
-			fmt.Printf("v: %+v \n\n", v)
 			qr[k.Value.(ast.Var)] = v
 			return nil
 		}) // cannot return error
