@@ -3,6 +3,7 @@ package envoyauth
 import (
 	"context"
 	"fmt"
+	"strings"
 	"sync"
 
 	"github.com/open-policy-agent/opa/ast"
@@ -61,6 +62,13 @@ func Eval(ctx context.Context, evalContext EvalContext, input ast.Value, result 
 		return err
 	}
 
+	var suppress = input == nil || strings.Contains(fmt.Sprintf("%v", input), "health")
+	if !suppress {
+		fmt.Printf("input: %+v \n\n", input)
+		fmt.Printf("ctx: %+v \n\n", ctx)
+		fmt.Printf("evalContext.InterQueryBuiltinCache: %+v \n\n", evalContext.InterQueryBuiltinCache())
+		fmt.Printf("evalContext.Store: %+v \n\n", evalContext.Store())
+	}
 	var rs rego.ResultSet
 	rs, err = evalContext.PreparedQuery().Eval(
 		ctx,
