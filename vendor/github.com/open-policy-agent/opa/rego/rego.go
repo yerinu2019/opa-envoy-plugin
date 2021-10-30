@@ -1850,11 +1850,11 @@ func (r *Rego) eval(ctx context.Context, ectx *EvalContext) (ResultSet, error) {
 	if !suppress {
 		fmt.Printf("ectx.compiledQuery.query: %+v \n\n", ectx.compiledQuery.query)
 		fmt.Printf("ectx.parsedInput: %+v \n\n", ectx.parsedInput)
-		fmt.Printf("r.store: %+v \n\n", r.store)
+		//fmt.Printf("r.store: %+v \n\n", r.store)
 		//m, _ := storage.ReadOne(ctx, r.store, []string{"data", "system", "log", "mask"})
 		//fmt.Printf("data.system.log.mask: %+v \n\n", m)
-		var policies, _ = r.store.ListPolicies(ctx, ectx.txn)
-		fmt.Printf("r.store.policies: %+v \n\n", policies)
+		//var policies, _ = r.store.ListPolicies(ctx, ectx.txn)
+		//fmt.Printf("r.store.policies: %+v \n\n", policies)
 	}
 
 	if ectx.parsedInput != nil {
@@ -1862,9 +1862,6 @@ func (r *Rego) eval(ctx context.Context, ectx *EvalContext) (ResultSet, error) {
 	}
 
 	for i := range ectx.resolvers {
-		fmt.Printf("resolver[%v].ref: %+v \n\n", i, ectx.resolvers[i].ref)
-		fmt.Printf("resolver[%v].r: %+v \n\n", i, ectx.resolvers[i].r)
-		
 		q = q.WithResolver(ectx.resolvers[i].ref, ectx.resolvers[i].r)
 	}
 
@@ -1877,11 +1874,15 @@ func (r *Rego) eval(ctx context.Context, ectx *EvalContext) (ResultSet, error) {
 		c.Cancel()
 	})
 
+	if !suppress {
+		fmt.Printf("q: %+v \n\n", q)
+		fmt.Printf("ctx: %+v \n\n", ctx)
+	}
 	var rs ResultSet
 	err := q.Iter(ctx, func(qr topdown.QueryResult) error {
 		if !suppress {
 			fmt.Printf("qr: %+v \n\n", qr)
-			fmt.Printf("ctx: %+v \n\n", ctx)
+			fmt.Printf("ectx: %+v \n\n", ectx)
 		}
 
 		result, err := r.generateResult(qr, ectx)

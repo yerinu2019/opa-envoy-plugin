@@ -9,7 +9,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/open-policy-agent/opa/topdown"
 	"math"
 	"math/rand"
 	"net/http"
@@ -856,7 +855,6 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 		ctx,
 		rego.EvalParsedInput(input),
 		rego.EvalTransaction(txn),
-		rego.EvalQueryTracer(topdown.NewBufferTracer()),
 	)
 	fmt.Printf("rs length: %v\n", len(rs))
 	fmt.Printf("rs: %+v\n", rs)
