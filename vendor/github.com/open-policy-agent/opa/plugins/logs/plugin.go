@@ -31,6 +31,7 @@ import (
 	"github.com/open-policy-agent/opa/server"
 	"github.com/open-policy-agent/opa/storage"
 	"github.com/open-policy-agent/opa/util"
+	"github.com/open-policy-agent/opa/topdown/cache"
 )
 
 // Logger defines the interface for decision logging plugins.
@@ -817,12 +818,14 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 			query := ast.NewBody(ast.NewExpr(ast.NewTerm(p.config.maskDecisionRef)))
 			fmt.Printf("query: %+v\n\n", query)
 
+			interQueryCache, _ := cache.FromContext(ctx)
 			r := rego.New(
 				rego.ParsedQuery(query),
 				rego.Compiler(p.manager.GetCompiler()),
 				rego.Store(p.manager.Store),
 				rego.Transaction(txn),
 				rego.Runtime(p.manager.Info),
+				rego.InterQueryBuiltinCache(*interQueryCache),
 			)
 			fmt.Printf("r: %+v\n\n", r)
 

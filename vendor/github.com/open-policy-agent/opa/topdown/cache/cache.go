@@ -7,6 +7,7 @@ package cache
 
 import (
 	"container/list"
+	"context"
 
 	"github.com/open-policy-agent/opa/ast"
 
@@ -18,6 +19,18 @@ import (
 const (
 	defaultMaxSizeBytes = int64(0) // unlimited
 )
+
+type key int
+var cacheKey key
+
+func NewContext(ctx context.Context, cache *InterQueryCache) context.Context {
+	return context.WithValue(ctx, cacheKey, cache)
+}
+
+func FromContext(ctx context.Context) (*InterQueryCache, bool) {
+	cache, ok := ctx.Value(cacheKey).(*InterQueryCache)
+	return cache, ok
+}
 
 // Config represents the configuration of the inter-query cache.
 type Config struct {
