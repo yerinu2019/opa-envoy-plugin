@@ -286,10 +286,11 @@ func newMaskRuleSet(rv interface{}, onRuleError func(*maskRule, error)) (*maskRu
 	}
 	var rawRules []interface{}
 
-	fmt.Printf("json marshall result: %+v\n\n", string(bs[:]))
+	fmt.Printf("bs: %+v\n\n", string(bs[:]))
 	if err := util.Unmarshal(bs, &rawRules); err != nil {
 		return nil, errors.Wrap(err, "json unmarshal error")
 	}
+	fmt.Printf("rawRules: %+v \n\n", rawRules)
 
 	for _, iface := range rawRules {
 
@@ -306,7 +307,7 @@ func newMaskRuleSet(rv interface{}, onRuleError func(*maskRule, error)) (*maskRu
 			mRuleSet.Rules = append(mRuleSet.Rules, rule)
 
 		case map[string]interface{}:
-
+			fmt.Printf("v: %+v \n\n", v)
 			bs, err := json.Marshal(v)
 			if err != nil {
 				return nil, errors.Wrap(err, "interface json marshal error")
