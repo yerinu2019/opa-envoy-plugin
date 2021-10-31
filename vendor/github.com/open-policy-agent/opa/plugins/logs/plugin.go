@@ -847,8 +847,25 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 	if err != nil {
 		return errors.Wrap(err, "AST error")
 	}
+	var path = ast.RefTerm(ast.StringTerm("result"),ast.StringTerm("mask")).Value.(ast.Ref)
+	var maskResult ast.Value
+	maskResult, err = input.Find(path)
+	if err != nil {
+		fmt.Printf("maskResult: %+v\n\n", maskResult)
+		mRuleSet, err := newMaskRuleSet(
+			maskResult,
+			func(mRule *maskRule, err error) {
+				p.logger.Error("mask rule skipped: %s: %s", mRule.String(), err.Error())
+			},
+		)
+		if err != nil {
+			return err
+		}
+
+		mRuleSet.Mask(event)
+		return nil
+	}
 	fmt.Printf("input: %+v\n\n", input)
-	
 	fmt.Printf("ctx: %+v\n\n", ctx)
 	fmt.Printf("txn: %+v\n", txn)
 	rs, err := mask.Eval(
