@@ -11,8 +11,8 @@ import (
 	"io"
 	"reflect"
 
-	"github.com/pkg/errors"
 	"github.com/ghodss/yaml"
+	"github.com/pkg/errors"
 )
 
 // UnmarshalJSON parses the JSON encoded data and stores the result in the value
@@ -23,10 +23,14 @@ import (
 func UnmarshalJSON(bs []byte, x interface{}) (err error) {
 	buf := bytes.NewBuffer(bs)
 	decoder := NewJSONDecoder(buf)
+	fmt.Printf("bs: %+v\n\n", string(bs[:]))
+	fmt.Printf("decoder: %+v\n\n", decoder)
+	fmt.Printf("x before decode: %+v\n\n", x)
 	if err := decoder.Decode(x); err != nil {
 		fmt.Printf("decoding %+v to %T\n\n", string(bs[:]), x)
 		return errors.Wrap(err, "decode error")
 	}
+	fmt.Printf("x after decode: %+v\n\n", x)
 
 	// Since decoder.Decode validates only the first json structure in bytes,
 	// check if decoder has more bytes to consume to validate whole input bytes.
