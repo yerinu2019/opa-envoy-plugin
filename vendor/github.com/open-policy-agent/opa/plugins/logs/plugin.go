@@ -851,8 +851,15 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 	var maskResult ast.Value
 	maskResult, err = input.Find(path)
 	if err == nil {
-		fmt.Printf("maskResult: %+v\n\n", maskResult)
 		fmt.Printf("maskResult: %#v\n\n", maskResult)
+
+		switch maskResult := maskResult.(type) {
+		case *ast.Array:
+			for i := 0; i < maskResult.Len(); i++ {
+				fmt.Printf("maskResult[%d]: %#v", i, maskResult.Elem(i).Value)
+			}
+		}
+
 		mRuleSet, err := newMaskRuleSet(
 			maskResult,
 			func(mRule *maskRule, err error) {
