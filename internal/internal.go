@@ -7,7 +7,6 @@ package internal
 import (
 	"context"
 	"fmt"
-	"github.com/open-policy-agent/opa/topdown/cache"
 	"net"
 	"net/url"
 	"os"
@@ -418,9 +417,6 @@ func (p *envoyExtAuthzGrpcServer) log(ctx context.Context, input interface{}, re
 	if p.cfg.Path != "" {
 		info.Path = p.cfg.Path
 	}
-
-	// path EvalContext in context
-	cache.NewContext(ctx, &p.interQueryBuiltinCache)
 
 	return decisionlog.LogDecision(ctx, p.manager, info, result, err)
 }

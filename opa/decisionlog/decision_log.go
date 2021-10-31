@@ -38,6 +38,9 @@ func LogDecision(ctx context.Context, manager *plugins.Manager, info *server.Inf
 		return nil
 	}
 
+	//mask := "[{\"/input/attributes/request/http/body\": [true]}, {\"/input/parsed_body\": [true]}]"
+	//info.InputAST, err = getAstValue(mask)
+
 	info.Revision = result.Revision
 
 	bundles := map[string]server.BundleInfo{}
