@@ -852,6 +852,7 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 	maskResult, err = input.Find(path)
 	if err == nil {
 		fmt.Printf("maskResult: %+v\n\n", maskResult)
+		fmt.Printf("maskResult: %#v\n\n", maskResult)
 		mRuleSet, err := newMaskRuleSet(
 			maskResult,
 			func(mRule *maskRule, err error) {
