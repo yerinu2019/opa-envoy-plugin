@@ -308,6 +308,7 @@ func newMaskRuleSet(rv interface{}, onRuleError func(*maskRule, error)) (*maskRu
 
 		case map[string]interface{}:
 			fmt.Printf("v: %+v \n\n", v)
+			fmt.Printf("iface: %+v \n\n", iface)
 			bs, err := json.Marshal(v)
 			if err != nil {
 				return nil, errors.Wrap(err, "interface json marshal error")
