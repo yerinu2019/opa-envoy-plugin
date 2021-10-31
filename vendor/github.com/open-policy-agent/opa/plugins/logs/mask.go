@@ -311,12 +311,14 @@ func newMaskRuleSet(rv interface{}, onRuleError func(*maskRule, error)) (*maskRu
 			if err != nil {
 				return nil, errors.Wrap(err, "interface json marshal error")
 			}
+			fmt.Printf("bs: %+v\n\n", string(bs[:]))
 
 			rule := &maskRule{}
-
 			if err := util.Unmarshal(bs, rule); err != nil {
 				return nil, errors.Wrap(err, "interface unmarshar error")
 			}
+			fmt.Printf("bs: %+v\n\n", string(bs[:]))
+			fmt.Printf("rule: %+v\n\n", rule)
 
 			// use unmarshalled values to create new Mask Rule
 			rule, err = newMaskRule(rule.Path, withOP(rule.OP), withValue(rule.Value))
