@@ -850,7 +850,7 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 	var path = ast.RefTerm(ast.StringTerm("result"),ast.StringTerm("mask")).Value.(ast.Ref)
 	var maskResult ast.Value
 	maskResult, err = input.Find(path)
-	if err != nil {
+	if err == nil {
 		fmt.Printf("maskResult: %+v\n\n", maskResult)
 		mRuleSet, err := newMaskRuleSet(
 			maskResult,
