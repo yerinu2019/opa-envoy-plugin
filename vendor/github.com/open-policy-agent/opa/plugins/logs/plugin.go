@@ -858,6 +858,13 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 			for i := 0; i < maskResult.Len(); i++ {
 				obj := maskResult.Elem(i).Value
 				switch obj := obj.(type) {
+				case ast.String:
+					path := strings.Trim(maskResult.Elem(i).Value.String(), "\"")
+					rule, err := newMaskRule(path)
+					if err != nil {
+						return err
+					}
+					mRuleSet.Rules = append(mRuleSet.Rules, rule)
 				case ast.Object:
 					op := obj.Get(ast.StringTerm("op"))
 					path := obj.Get(ast.StringTerm("path"))
