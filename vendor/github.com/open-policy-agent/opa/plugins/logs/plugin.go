@@ -878,7 +878,7 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 					}
 					rule, err := newMaskRule(path.String(), withOP(ruleOp), withValue(value.String()))
 					if err != nil {
-						return nil
+						return err
 					}
 					fmt.Printf("rule: %+v\n%#v\n\n", rule, rule)
 					mRuleSet.Rules = append(mRuleSet.Rules, rule)
