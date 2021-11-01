@@ -813,9 +813,7 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 		defer p.maskMutex.Unlock()
 
 		if p.mask == nil {
-
 			query := ast.NewBody(ast.NewExpr(ast.NewTerm(p.config.maskDecisionRef)))
-			fmt.Printf("query: %+v\n\n", query)
 
 			r := rego.New(
 				rego.ParsedQuery(query),
@@ -824,7 +822,6 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 				rego.Transaction(txn),
 				rego.Runtime(p.manager.Info),
 			)
-			fmt.Printf("r: %+v\n\n", r)
 
 			pq, err := r.PrepareForEval(context.Background())
 			if err != nil {
@@ -833,16 +830,14 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 
 			p.mask = &pq
 		}
-		fmt.Printf("p.mask: %+v\n\n", p.mask)
 
 		return *p.mask, nil
 	}()
 
 	if err != nil {
-		return errors.Wrap(err, "???1")
+		return err
 	}
 
-	fmt.Printf("event: %+v\n\n", event)
 	input, err := event.AST()
 	if err != nil {
 		return errors.Wrap(err, "AST error")
@@ -853,7 +848,6 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 
 	if err == nil {
 		// mask rules from input result
-		fmt.Printf("maskResult: %#v\n\n", maskResult)
 		var mRuleSet = &maskRuleSet{
 			OnRuleError: func(mRule *maskRule, err error) {
 				p.logger.Error("mask rule skipped: %s: %s", mRule.String(), err.Error())
@@ -863,10 +857,8 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 		case *ast.Array:
 			for i := 0; i < maskResult.Len(); i++ {
 				obj := maskResult.Elem(i).Value
-				fmt.Printf("maskResult[%d]: %#v\n\n", i, obj)
 				switch obj := obj.(type) {
 				case ast.Object:
-					fmt.Printf("obj: %#v\n\n", obj)
 					op := obj.Get(ast.StringTerm("op"))
 					path := obj.Get(ast.StringTerm("path"))
 					value := obj.Get(ast.StringTerm("value"))
@@ -879,7 +871,6 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 					if err != nil {
 						return err
 					}
-					fmt.Printf("rule: %#v\n\n", rule)
 					mRuleSet.Rules = append(mRuleSet.Rules, rule)
 				}
 			}
@@ -887,28 +878,16 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 		mRuleSet.Mask(event)
 		return nil
 	}
-	fmt.Printf("input: %+v\n\n", input)
 	rs, err := mask.Eval(
 		ctx,
 		rego.EvalParsedInput(input),
 		rego.EvalTransaction(txn),
 	)
-	fmt.Printf("rs length: %v\n", len(rs))
-	fmt.Printf("rs: %+v\n", rs)
 
 	if err != nil {
 		return errors.Wrap(err, "mask Eval error")
 	} else if len(rs) == 0 {
 		return nil
-	}
-
-	fmt.Printf("rs[0].Expressions length: %v\n", len(rs[0].Expressions))
-	fmt.Printf("rs[0].Expressions[0].Text: %+v\n", rs[0].Expressions[0].Text)
-	fmt.Printf("rs[0].Expressions[0].Location: %+v\n", rs[0].Expressions[0].Location)
-	switch m := rs[0].Expressions[0].Value.(type) {
-	case map[string]interface {}:
-		fmt.Printf("rs[0].Expression.[0].Value length: %v\n", len(m))
-		fmt.Printf("rs[0].Expression.[0].Value: %+v\n", m)
 	}
 	
 	mRuleSet, err := newMaskRuleSet(
