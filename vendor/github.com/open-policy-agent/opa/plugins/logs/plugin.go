@@ -870,7 +870,7 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 					op := obj.Get(ast.StringTerm("op"))
 					path := obj.Get(ast.StringTerm("path"))
 					value := obj.Get(ast.StringTerm("value"))
-					fmt.Printf("op:%v, path:%v, value:%v\n\n", op, path, value)
+					fmt.Printf("op:%v, path:%v, value:%v\n\n", op.String(), path.String(), value.String())
 
 					ruleOp := maskOPRemove
 					if op.String() == "upsert" {

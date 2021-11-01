@@ -58,10 +58,11 @@ func newMaskRule(path string, opts ...maskRuleOption) (*maskRule, error) {
 		defaultFailUndefinedPath = false
 	)
 
+	fmt.Printf("path: %v\n\n", path)
 	if len(path) == 0 {
 		return nil, fmt.Errorf("mask must be non-empty")
 	} else if !strings.HasPrefix(path, "/") {
-		return nil, fmt.Errorf("mask must be slash-prefixed")
+		return nil, errors.Wrap(fmt.Errorf("mask must be slash-prefixed: %v", path), "bad path")
 	}
 
 	parts := strings.Split(path[1:], "/")
