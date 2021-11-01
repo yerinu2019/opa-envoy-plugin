@@ -23,14 +23,10 @@ import (
 func UnmarshalJSON(bs []byte, x interface{}) (err error) {
 	buf := bytes.NewBuffer(bs)
 	decoder := NewJSONDecoder(buf)
-	fmt.Printf("bs: %+v\n\n", string(bs[:]))
-	fmt.Printf("decoder: %+v\n\n", decoder)
-	fmt.Printf("x before decode: %#v\n\n", x)
 	if err := decoder.Decode(x); err != nil {
 		fmt.Printf("decoding %+v to %T\n\n", string(bs[:]), x)
 		return errors.Wrap(err, "decode error")
 	}
-	fmt.Printf("x after decode: %#v\n\n", x)
 
 	// Since decoder.Decode validates only the first json structure in bytes,
 	// check if decoder has more bytes to consume to validate whole input bytes.
@@ -115,6 +111,5 @@ func Unmarshal(bs []byte, v interface{}) error {
 	if err != nil {
 		return errors.Wrap(err, "yamlToJson error")
 	}
-	fmt.Printf("YAMLToJSON result: %+v\n\n", string(bs[:]))
 	return UnmarshalJSON(bs, v)
 }

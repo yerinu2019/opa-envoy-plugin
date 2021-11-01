@@ -870,7 +870,6 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 					op := obj.Get(ast.StringTerm("op"))
 					path := obj.Get(ast.StringTerm("path"))
 					value := obj.Get(ast.StringTerm("value"))
-					fmt.Printf("op:%v, path:%v, value:%v\n\n", op.String(), path.String(), value.String())
 
 					ruleOp := maskOPRemove
 					if op.String() == "\"upsert\"" {
@@ -880,18 +879,15 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 					if err != nil {
 						return err
 					}
-					fmt.Printf("rule: %+v\n%#v\n\n", rule, rule)
+					fmt.Printf("rule: %#v\n\n", rule)
 					mRuleSet.Rules = append(mRuleSet.Rules, rule)
 				}
 			}
 		}
-
 		mRuleSet.Mask(event)
 		return nil
 	}
 	fmt.Printf("input: %+v\n\n", input)
-	fmt.Printf("ctx: %+v\n\n", ctx)
-	fmt.Printf("txn: %+v\n", txn)
 	rs, err := mask.Eval(
 		ctx,
 		rego.EvalParsedInput(input),

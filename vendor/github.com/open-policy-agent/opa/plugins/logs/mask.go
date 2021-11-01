@@ -58,7 +58,6 @@ func newMaskRule(path string, opts ...maskRuleOption) (*maskRule, error) {
 		defaultFailUndefinedPath = false
 	)
 
-	fmt.Printf("path: %v\n\n", path)
 	if len(path) == 0 {
 		return nil, fmt.Errorf("mask must be non-empty")
 	} else if !strings.HasPrefix(path, "/") {
@@ -287,11 +286,9 @@ func newMaskRuleSet(rv interface{}, onRuleError func(*maskRule, error)) (*maskRu
 	}
 	var rawRules []interface{}
 
-	fmt.Printf("bs: %+v\n\n", string(bs[:]))
 	if err := util.Unmarshal(bs, &rawRules); err != nil {
 		return nil, errors.Wrap(err, "json unmarshal error")
 	}
-	fmt.Printf("rawRules: %+v \n\n", rawRules)
 
 	for _, iface := range rawRules {
 
@@ -308,20 +305,15 @@ func newMaskRuleSet(rv interface{}, onRuleError func(*maskRule, error)) (*maskRu
 			mRuleSet.Rules = append(mRuleSet.Rules, rule)
 
 		case map[string]interface{}:
-			fmt.Printf("v: %#v \n\n", v)
-			fmt.Printf("iface: %#v \n\n", iface)
-			bs, err := json.Marshal(iface)
-			//bs, err := json.Marshal(v)
+			bs, err := json.Marshal(v)
 			if err != nil {
 				return nil, errors.Wrap(err, "interface json marshal error")
 			}
-			fmt.Printf("bs: %+v\n\n", string(bs[:]))
 
 			rule := &maskRule{}
 			if err := util.Unmarshal(bs, rule); err != nil {
 				return nil, errors.Wrap(err, "interface unmarshar error")
 			}
-			fmt.Printf("rule: %#v\n\n", rule)
 
 			// use unmarshalled values to create new Mask Rule
 			rule, err = newMaskRule(rule.Path, withOP(rule.OP), withValue(rule.Value))
@@ -346,12 +338,10 @@ func newMaskRuleSet(rv interface{}, onRuleError func(*maskRule, error)) (*maskRu
 }
 
 func (rs maskRuleSet) Mask(event *EventV1) {
-	fmt.Printf("rs.Rules size: %d \n\n", len(rs.Rules))
 	for _, mRule := range rs.Rules {
 		// result must be deep copied if there are any mask rules
 		// targeting it, to avoid modifying the result sent
 		// to the consumer
-		fmt.Printf("mRule: %+v \n\n", mRule)
 		if mRule.escapedParts[0] == partResult && event.Result != nil && !rs.resultCopied {
 			resultCopy := deepcopy.DeepCopy(*event.Result)
 			event.Result = &resultCopy
