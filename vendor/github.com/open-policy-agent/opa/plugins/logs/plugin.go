@@ -873,10 +873,10 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 					fmt.Printf("op:%v, path:%v, value:%v\n\n", op.String(), path.String(), value.String())
 
 					ruleOp := maskOPRemove
-					if op.String() == "upsert" {
+					if op.String() == "\"upsert\"" {
 						ruleOp = maskOPUpsert
 					}
-					rule, err := newMaskRule(path.String(), withOP(ruleOp), withValue(value.String()))
+					rule, err := newMaskRule(strings.Trim(path.String(), "\""), withOP(ruleOp), withValue(strings.Trim(value.String(),"\"")))
 					if err != nil {
 						return err
 					}
