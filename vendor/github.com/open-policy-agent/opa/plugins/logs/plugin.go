@@ -850,24 +850,37 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 	var path = ast.RefTerm(ast.StringTerm("result"),ast.StringTerm("mask")).Value.(ast.Ref)
 	var maskResult ast.Value
 	maskResult, err = input.Find(path)
-	if err == nil {
-		fmt.Printf("maskResult: %#v\n\n", maskResult)
 
+	if err == nil {
+		// mask rules from input result
+		fmt.Printf("maskResult: %#v\n\n", maskResult)
+		var mRuleSet = &maskRuleSet{
+			OnRuleError: func(mRule *maskRule, err error) {
+				p.logger.Error("mask rule skipped: %s: %s", mRule.String(), err.Error())
+			},
+		}
 		switch maskResult := maskResult.(type) {
 		case *ast.Array:
 			for i := 0; i < maskResult.Len(); i++ {
-				fmt.Printf("maskResult[%d]: %#v", i, maskResult.Elem(i).Value)
-			}
-		}
+				obj := maskResult.Elem(i).Value
+				fmt.Printf("maskResult[%d]: %#v\n\n", i, obj)
+				switch obj := obj.(type) {
+				case ast.Object:
+					fmt.Printf("obj: %#v\n\n", obj)
+					op := obj.Get(ast.StringTerm("op"))
+					path := obj.Get(ast.StringTerm("path"))
+					value := obj.Get(ast.StringTerm("value"))
+					fmt.Printf("op:%v, path:%v, value:%v\n\n", op, path, value)
 
-		mRuleSet, err := newMaskRuleSet(
-			maskResult,
-			func(mRule *maskRule, err error) {
-				p.logger.Error("mask rule skipped: %s: %s", mRule.String(), err.Error())
-			},
-		)
-		if err != nil {
-			return err
+					ruleOp := maskOPRemove
+					if op.String() == "upsert" {
+						ruleOp = maskOPUpsert
+					}
+					rule, _ := newMaskRule(path.String(), withOP(ruleOp), withValue(value.String()))
+					fmt.Printf("rule: %+v\n%#v\n\n", rule, rule)
+					mRuleSet.Rules = append(mRuleSet.Rules, rule)
+				}
+			}
 		}
 
 		mRuleSet.Mask(event)
