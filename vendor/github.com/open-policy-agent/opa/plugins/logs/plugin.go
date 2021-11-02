@@ -886,7 +886,6 @@ func (p *Plugin) maskEvent(ctx context.Context, txn storage.Transaction, event *
 		return nil
 	}
 	fmt.Printf("mask: %+v\n\nmask: %#v\n\n", mask, mask)
-	fmt.Printf("input: %+v\n\ninput: %#v\n\n", input, input)
 	rs, err := mask.Eval(
 		ctx,
 		rego.EvalParsedInput(input),
