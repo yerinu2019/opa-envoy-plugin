@@ -365,7 +365,9 @@ func (pq PreparedEvalQuery) Eval(ctx context.Context, options ...EvalOption) (Re
 	}
 	defer finish(ctx)
 
+	fmt.Printf("ectx:%+v\n\nectx:%#v\n\n", ectx)
 	ectx.compiledQuery = pq.r.compiledQueries[evalQueryType]
+	fmt.Printf("ectx.compiledQuery: %+v\n\nectx.compiledQuery:%#v\n\n", ectx.compiledQuery, ectx.compiledQuery)
 
 	return pq.r.eval(ctx, ectx)
 }
@@ -1862,13 +1864,16 @@ func (r *Rego) eval(ctx context.Context, ectx *EvalContext) (ResultSet, error) {
 		c.Cancel()
 	})
 
+	fmt.Printf("q:%+v\n\n,q:%#v\n\n", q, q)
 	var rs ResultSet
 	err := q.Iter(ctx, func(qr topdown.QueryResult) error {
+		fmt.Printf("qr:%+v\n\n,qr:%#v\n\n", qr, qr)
 		result, err := r.generateResult(qr, ectx)
 		if err != nil {
 			return err
 		}
 
+		fmt.Printf("result:%+v\n\n,result:%#v\n\n", result, result)
 		rs = append(rs, result)
 		return nil
 	})
@@ -1944,6 +1949,9 @@ func (r *Rego) generateResult(qr topdown.QueryResult, ectx *EvalContext) (Result
 	result := newResult()
 	for k, term := range qr {
 		v, err := r.generateJSON(term, ectx)
+		fmt.Printf("k:%+v\n\n,k:%#v\n\n", k, k)
+		fmt.Printf("term:%+v\n\n,term:%#v\n\n", term, term)
+		fmt.Printf("v:%+v\n\n,v:%#v\n\n", v, v)
 		
 		if err != nil {
 			return result, err
@@ -1953,6 +1961,8 @@ func (r *Rego) generateResult(qr topdown.QueryResult, ectx *EvalContext) (Result
 			k = rw
 		}
 		if isTermVar(k) || isTermWasmVar(k) || k.IsGenerated() || k.IsWildcard() {
+			fmt.Printf("isTermVar(k):%+v\n\n,isTermVar(k):%#v\n\n", isTermVar(k), isTermVar(k))
+			fmt.Printf("k.IsGenerated():%+v\n\n,k.IsGenerated():%#v\n\n", k.IsGenerated(), k.IsGenerated())
 			continue
 		}
 		result.Bindings[string(k)] = v
@@ -1965,12 +1975,19 @@ func (r *Rego) generateResult(qr topdown.QueryResult, ectx *EvalContext) (Result
 		
 		if k, ok := r.capture[expr]; ok {
 			v, err := r.generateJSON(qr[k], ectx)
+			fmt.Printf("k:%+v\n\n,k:%#v\n\n", k, k)
+			fmt.Printf("expr:%+v\n\n,expr:%#v\n\n", expr, expr)
+			fmt.Printf("qr[k]:%+v\n\n,qr[k]:%#v\n\n", qr[k], qr[k])
+			fmt.Printf("v:%+v\n\n,v:%#v\n\n", v, v)
 			if err != nil {
 				return result, err
 			}
 			result.Expressions = append(result.Expressions, newExpressionValue(expr, v))
+			fmt.Printf("result.Expressions:%+v\n\n,result.Expressions:%#v\n\n", result.Expressions, result.Expressions)
 		} else {
 			result.Expressions = append(result.Expressions, newExpressionValue(expr, true))
+			fmt.Printf("k:%+v\n\n,k:%#v\n\n", k, k)
+			fmt.Printf("result.Expressions:%+v\n\n,result.Expressions:%#v\n\n", result.Expressions, result.Expressions)
 		}
 
 	}
