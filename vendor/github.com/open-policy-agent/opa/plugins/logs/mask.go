@@ -275,8 +275,6 @@ func emptyMapToEmptyArray(bs []byte) []byte {
 
 func newMaskRuleSet(rv interface{}, onRuleError func(*maskRule, error)) (*maskRuleSet, error) {
 	ba, err := json.Marshal(rv)
-	fmt.Printf("rv: %+v\n\nrv: %#v\n\n", rv, rv)
-	fmt.Printf("ba: %v\n\n", string(ba[:]))
 	if err != nil {
 		return nil, errors.Wrap(err, "json marshal error")
 	}
@@ -299,7 +297,6 @@ func newMaskRuleSet(rv interface{}, onRuleError func(*maskRule, error)) (*maskRu
 		case string:
 			// preserve default behavior of remove when
 			// structured mask format is not provided
-			fmt.Printf("v: %v\n\n", v)
 			rule, err := newMaskRule(v)
 			if err != nil {
 				return nil, errors.Wrap(err, "string newMaskRule error")

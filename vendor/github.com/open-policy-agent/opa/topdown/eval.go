@@ -265,9 +265,7 @@ func (e *eval) evalExpr(iter evalIterator) error {
 		}, fmt.Sprintf("e: %+v \n\n iter: %+v", e, iter))
 	}
 
-	fmt.Printf("e.index: %+v\ne.len(e.query): %#v\n\n", e.index, len(e.query))
 	if e.index >= len(e.query) {
-		fmt.Println("call iter(e)")
 		return iter(e)
 	}
 
@@ -276,12 +274,10 @@ func (e *eval) evalExpr(iter evalIterator) error {
 	e.traceEval(expr)
 
 	if len(expr.With) > 0 {
-		fmt.Println("call e.evalWith(iter)")
 		return e.evalWith(iter)
 	}
 
 	return e.evalStep(func(e *eval) error {
-		fmt.Println("call e.next(iter)")
 		return e.next(iter)
 	})
 }
@@ -297,11 +293,9 @@ func (e *eval) evalStep(iter evalIterator) error {
 	var defined bool
 	var err error
 
-	fmt.Printf("expr.Terms: %+v\nexpr.Terms: %#v\n\n", expr.Terms, expr.Terms)
 	switch terms := expr.Terms.(type) {
 	case []*ast.Term:
 		if expr.IsEquality() {
-			fmt.Printf("call e.unify(terms[1], terms[2], )\nterms[1]:%+v, %#v\nterms[2]:%+v, %#v\n\n", terms[1], terms[1], terms[2], terms[2])
 			err = e.unify(terms[1], terms[2], func() error {
 				defined = true
 				err := iter(e)
@@ -309,7 +303,6 @@ func (e *eval) evalStep(iter evalIterator) error {
 				return err
 			})
 		} else {
-			fmt.Printf("call e.evalCall(terms)\nterms: %+v\nterms: %#v\n\n", terms, terms)
 			err = e.evalCall(terms, func() error {
 				defined = true
 				err := iter(e)
@@ -318,16 +311,9 @@ func (e *eval) evalStep(iter evalIterator) error {
 			})
 		}
 	case *ast.Term:
-		lterm := fmt.Sprintf("term_%d_%d", e.queryID, e.index)
-		rterm := e.generateVar(lterm)
-		fmt.Printf("call e.unify(terms, rterm, )\n")
-		fmt.Printf("terms: %+v\nterms.Value: %#v\n", terms, terms.Value)
-		fmt.Printf("rterm: %+v\nrterm: %#v\n", rterm, rterm)
+		rterm := e.generateVar(fmt.Sprintf("term_%d_%d", e.queryID, e.index))
 		err = e.unify(terms, rterm, func() error {
 			if e.saveSet.Contains(rterm, e.bindings) {
-				fmt.Printf("e.saveSet.Contains(rterm, e.bindings)\n")
-				fmt.Printf("rterm: %#v\n", rterm)
-				fmt.Printf("e.bindings: %#v\n", e.bindings)
 				return e.saveExpr(ast.NewExpr(rterm), e.bindings, func() error {
 					return iter(e)
 				})
@@ -1158,9 +1144,6 @@ func (e *eval) biunifyComprehensionObject(x *ast.ObjectComprehension, b *ast.Ter
 func (e *eval) saveExpr(expr *ast.Expr, b *bindings, iter unifyIterator) error {
 	expr.With = e.query[e.index].With
 	expr.Location = e.query[e.index].Location
-	fmt.Printf("e.saveStack(expr, b, b)\n")
-	fmt.Printf("expr: %#v\n", expr)
-	fmt.Printf("bindings: %#v\n\n", b)
 	e.saveStack.Push(expr, b, b)
 	e.traceSave(expr)
 	err := iter()

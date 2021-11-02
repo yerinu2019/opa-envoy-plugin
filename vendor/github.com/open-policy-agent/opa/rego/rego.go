@@ -1869,7 +1869,6 @@ func (r *Rego) eval(ctx context.Context, ectx *EvalContext) (ResultSet, error) {
 			return err
 		}
 
-		fmt.Printf("result:%+v\n\nresult:%#v\n\n", result, result)
 		rs = append(rs, result)
 		return nil
 	})
@@ -1945,46 +1944,33 @@ func (r *Rego) generateResult(qr topdown.QueryResult, ectx *EvalContext) (Result
 	result := newResult()
 	for k, term := range qr {
 		v, err := r.generateJSON(term, ectx)
-		fmt.Printf("k:%v, term:%v, v:%#v\n\n", k.String(), term.Value.String(), v)
 		
 		if err != nil {
 			return result, err
 		}
 
 		if rw, ok := rewritten[k]; ok {
-			fmt.Printf("rewritten k: %#v to %#v", k, rw)
 			k = rw
 		}
 		if isTermVar(k) || isTermWasmVar(k) || k.IsGenerated() || k.IsWildcard() {
-			fmt.Printf("skip k:%#v, isTermVar(k):%v, k.IsGenerated():%v, k.IsWildcard():%v\n\n",
-				k, isTermVar(k), k.IsGenerated(), k.IsWildcard())
 			continue
 		}
 		result.Bindings[string(k)] = v
-		fmt.Printf("result.Bindings[string(k)]: k=%v, v=%#v\n\n", string(k), v)
 	}
 
 	for _, expr := range ectx.compiledQuery.query {
 		if expr.Generated {
-			fmt.Printf("skip expr.Generated")
 			continue
 		}
 		
 		if k, ok := r.capture[expr]; ok {
 			v, err := r.generateJSON(qr[k], ectx)
-			fmt.Printf("k:%+v, k:%#v\n", k, k)
-			fmt.Printf("expr.With:%+v, expr.Terms:%+v\n", expr.With, expr.Terms)
-			fmt.Printf("qr[k]:%+v, qr[k]:%#v\n", qr[k], qr[k])
-			fmt.Printf("v:%+v, v:%#v\n\n", v, v)
 			if err != nil {
 				return result, err
 			}
 			result.Expressions = append(result.Expressions, newExpressionValue(expr, v))
-			fmt.Printf("result.Expressions:%+v\n\n,result.Expressions:%#v\n\n", result.Expressions, result.Expressions)
 		} else {
 			result.Expressions = append(result.Expressions, newExpressionValue(expr, true))
-			fmt.Printf("k:%+v\n\n,k:%#v\n\n", k, k)
-			fmt.Printf("result.Expressions:%+v\n\n,result.Expressions:%#v\n\n", result.Expressions, result.Expressions)
 		}
 
 	}

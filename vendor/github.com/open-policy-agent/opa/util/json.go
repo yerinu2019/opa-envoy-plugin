@@ -24,7 +24,6 @@ func UnmarshalJSON(bs []byte, x interface{}) (err error) {
 	buf := bytes.NewBuffer(bs)
 	decoder := NewJSONDecoder(buf)
 	if err := decoder.Decode(x); err != nil {
-		fmt.Printf("decoding %+v to %T\n\n", string(bs[:]), x)
 		return errors.Wrap(err, "decode error")
 	}
 
