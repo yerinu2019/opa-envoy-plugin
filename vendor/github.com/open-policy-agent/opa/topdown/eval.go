@@ -320,9 +320,14 @@ func (e *eval) evalStep(iter evalIterator) error {
 	case *ast.Term:
 		lterm := fmt.Sprintf("term_%d_%d", e.queryID, e.index)
 		rterm := e.generateVar(lterm)
-		fmt.Printf("call e.unify(terms, rterm, )\nterms: %+v, %#v\nrterm:%+v, %#v\n\n", terms, terms, rterm, rterm)
+		fmt.Printf("call e.unify(terms, rterm, )\n")
+		fmt.Printf("terms: %+v\nterms.Value: %#v\n", terms, terms.Value)
+		fmt.Printf("rterm: %+v\nrterm: %#v\n", rterm, rterm)
 		err = e.unify(terms, rterm, func() error {
 			if e.saveSet.Contains(rterm, e.bindings) {
+				fmt.Printf("e.saveSet.Contains(rterm, e.bindings)\n")
+				fmt.Printf("rterm: %#v\n", rterm)
+				fmt.Printf("e.bindings: %#v\n", e.bindings)
 				return e.saveExpr(ast.NewExpr(rterm), e.bindings, func() error {
 					return iter(e)
 				})
@@ -1153,6 +1158,9 @@ func (e *eval) biunifyComprehensionObject(x *ast.ObjectComprehension, b *ast.Ter
 func (e *eval) saveExpr(expr *ast.Expr, b *bindings, iter unifyIterator) error {
 	expr.With = e.query[e.index].With
 	expr.Location = e.query[e.index].Location
+	fmt.Printf("e.saveStack(expr, b, b)\n")
+	fmt.Printf("expr: %#v\n", expr)
+	fmt.Printf("bindings: %#v\n\n", b)
 	e.saveStack.Push(expr, b, b)
 	e.traceSave(expr)
 	err := iter()
