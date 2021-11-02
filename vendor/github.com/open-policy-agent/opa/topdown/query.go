@@ -435,6 +435,7 @@ func (q *Query) Iter(ctx context.Context, iter func(QueryResult) error) error {
 		indexing:               q.indexing,
 		builtinErrors:          &builtinErrors{},
 	}
+	fmt.Printf("before run e.bindings: %+v\ne.bindings: %#v\n\n", e.bindings, e.bindings)
 	e.caller = e
 	q.metrics.Timer(metrics.RegoQueryEval).Start()
 	fmt.Printf("e.query: %+v\ne.query: %#v\n\n", e.query, e.query)
