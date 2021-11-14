@@ -51,7 +51,7 @@ LDFLAGS := "-X github.com/open-policy-agent/opa/version.Version=$(VERSION) \
 
 .PHONY: all build build-darwin build-linux build-windows clean check check-fmt check-vet check-lint \
     deploy-ci docker-login generate image image-quick push push-latest tag-latest \
-    test test-cluster test-e2e version
+    test test-cluster test-e2e version generate-dockerfile
 
 ######################################################
 #
@@ -79,8 +79,9 @@ build-linux:
 build-windows:
 	@$(MAKE) build GOOS=windows
 
-build-tekton:
-	@$(MAKE) build-linux
+build-tekton: build-linux generate-dockerfile
+
+generate-dockerfile:
 	sed -e 's/GOARCH/$(GOARCH)/g' Dockerfile > .Dockerfile_$(GOARCH)
 
 image:
