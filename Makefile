@@ -79,6 +79,9 @@ build-linux:
 build-windows:
 	@$(MAKE) build GOOS=windows
 
+build-tekton: build-linux
+  sed -e 's/GOARCH/$(GOARCH)/g' Dockerfile > .Dockerfile_$(GOARCH)
+
 image:
 	@$(MAKE) ci-go-build-linux
 	@$(MAKE) image-quick
