@@ -81,6 +81,8 @@ build-windows:
 
 build-tekton: build-linux generate-dockerfile
 
+build-tekton-mac: build-darwin generate-dockerfile
+
 generate-dockerfile:
 	sed -e 's/GOARCH/$(GOARCH)/g' Dockerfile > .Dockerfile_$(GOARCH)
 
